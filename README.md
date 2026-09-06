@@ -48,17 +48,16 @@ git init
 git add .
 git commit -m "Initial commit: Aren Azat personal website"
 git branch -M main
-git remote add origin https://github.com/arenazat/arenazat.github.io.git
+git remote add origin https://github.com/arenazat/Aren-Web.git
 git push -u origin main
 ```
-*(Depo adınız farklıysa `origin` URL'sini kendi deponuza göre güncelleyiniz).*
 
 ### 3. GitHub Pages'i Aktif Edin
-1. GitHub deponuzun üst menüsünden **Settings** (Ayarlar) sekmesine tıklayın.
-2. Sol menüden **Pages** seçeneğini seçin.
-3. **Build and deployment > Source** kısmını **"Deploy from a branch"** yapın.
-4. **Branch** kısmında **`main`** dalını ve klasör olarak **`/ (root)`** seçip **Save** butonuna tıklayın.
-5. 1-2 dakika içinde siteniz **`https://arenazat.github.io/`** adresinde canlıya geçecektir!
+1. GitHub deponuzun üst menüsünden **Settings** (Ayarlar) sekmesine tıklayın:  
+   `https://github.com/arenazat/Aren-Web/settings/pages`
+2. **Build and deployment > Source** kısmını **"Deploy from a branch"** yapın.
+3. **Branch** kısmında **`main`** dalını ve klasör olarak **`/ (root)`** seçip **Save** butonuna tıklayın.
+4. 1-2 dakika içinde siteniz **`https://arenazat.github.io/Aren-Web/`** adresinde canlıya geçecektir!
 
 ---
 
