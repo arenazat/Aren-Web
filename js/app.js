@@ -602,8 +602,37 @@ function handleFormSubmit(event) {
 }
 
 // ==========================================================================
-// 9. INITIALIZATION
+// 9. INITIALIZATION & DYNAMIC CONTENT LOADER
 // ==========================================================================
+async function loadDynamicContent() {
+  // 1. Attempt to fetch latest published content.json from server / GitHub Pages
+  try {
+    const res = await fetch('./data/content.json?v=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      if (data.en) Object.assign(translations.en, data.en);
+      if (data.tr) Object.assign(translations.tr, data.tr);
+    }
+  } catch (e) {
+    console.log('Using default bundled translations.');
+  }
+
+  // 2. Overlay any local draft edits saved from Admin Panel
+  try {
+    const localCustom = localStorage.getItem('aren_custom_translations');
+    if (localCustom) {
+      const customData = JSON.parse(localCustom);
+      if (customData.en) Object.assign(translations.en, customData.en);
+      if (customData.tr) Object.assign(translations.tr, customData.tr);
+    }
+  } catch (e) {
+    console.error('Error reading local custom translations:', e);
+  }
+
+  // 3. Re-render texts with latest data
+  setLanguage(currentLang);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const yearSpan = document.getElementById('current-year');
   if (yearSpan) {
@@ -618,6 +647,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Language (Default: English)
   setLanguage(currentLang);
 
+  // Load any updated dynamic content from JSON or LocalStorage
+  loadDynamicContent();
+
   // Initialize Interactive Components
   initNavbar();
   initProjectAccordion();
@@ -625,3 +657,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initScrollReveal();
 });
+
