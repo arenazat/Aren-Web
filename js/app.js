@@ -8,6 +8,10 @@
 // ==========================================================================
 const translations = {
   tr: {
+    // Document & Meta
+    doc_title: "Aren Azat | Astrofizik, Hesaplamalı Fizik & Yazılım",
+    sig_name: "Aren Azat",
+
     // Navigation
     nav_about: "Hakkımda",
     nav_projects: "Projeler",
@@ -133,6 +137,10 @@ const translations = {
   },
 
   en: {
+    // Document & Meta
+    doc_title: "Aren Azat | Astrophysics, Computational Physics & Code",
+    sig_name: "Aren Azat",
+
     // Navigation
     nav_about: "About",
     nav_projects: "Projects",
@@ -306,10 +314,49 @@ function setLanguage(lang) {
   });
 
   // Update HTML Document Title
-  if (lang === 'tr') {
+  if (translations[lang] && translations[lang].doc_title) {
+    document.title = translations[lang].doc_title;
+  } else if (lang === 'tr') {
     document.title = "Aren Azat | Astrofizik, Hesaplamalı Fizik & Yazılım";
   } else {
     document.title = "Aren Azat | Astrophysics, Computational Physics & Code";
+  }
+}
+
+// Dynamically load content from localStorage and content.json
+async function loadDynamicContent() {
+  // 1. Merge localStorage custom edits (instant preview from admin panel)
+  const localDraft = localStorage.getItem('aren_custom_translations');
+  if (localDraft) {
+    try {
+      const parsed = JSON.parse(localDraft);
+      if (parsed.tr) Object.assign(translations.tr, parsed.tr);
+      if (parsed.en) Object.assign(translations.en, parsed.en);
+      setLanguage(currentLang);
+    } catch (e) {
+      console.warn('Local draft parsing error:', e);
+    }
+  }
+
+  // 2. Fetch live data/content.json if available
+  try {
+    const res = await fetch('./data/content.json?v=' + Date.now());
+    if (res.ok) {
+      const liveData = await res.json();
+      if (liveData.tr) Object.assign(translations.tr, liveData.tr);
+      if (liveData.en) Object.assign(translations.en, liveData.en);
+      // If local draft exists, let local draft take precedence over fetched content
+      if (localDraft) {
+        try {
+          const parsed = JSON.parse(localDraft);
+          if (parsed.tr) Object.assign(translations.tr, parsed.tr);
+          if (parsed.en) Object.assign(translations.en, parsed.en);
+        } catch (e) {}
+      }
+      setLanguage(currentLang);
+    }
+  } catch (err) {
+    // Graceful offline fallback to bundled translations dictionary
   }
 }
 
@@ -459,6 +506,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Language
   setLanguage(currentLang);
+
+  // Load custom edits or live content asynchronously
+  loadDynamicContent();
 
   // Initialize UI features
   initNavbar();

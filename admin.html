@@ -94,45 +94,29 @@
           <span class="adm-nav-icon">🏠</span>
           <span>Hero & Başlık</span>
         </button>
-        <button type="button" class="adm-nav-item" data-target="sec-working">
-          <span class="adm-nav-icon">⚡</span>
-          <span>Güncel Çalışmalar</span>
-        </button>
         <button type="button" class="adm-nav-item" data-target="sec-about">
           <span class="adm-nav-icon">👤</span>
-          <span>Hakkımda & Vizyon</span>
-        </button>
-        <button type="button" class="adm-nav-item" data-target="sec-research">
-          <span class="adm-nav-icon">🔭</span>
-          <span>Araştırma Alanları</span>
+          <span>Hakkımda</span>
         </button>
         <button type="button" class="adm-nav-item" data-target="sec-projects">
           <span class="adm-nav-icon">🪐</span>
-          <span>Araştırma Projeleri</span>
+          <span>Projeler</span>
         </button>
-        <button type="button" class="adm-nav-item" data-target="sec-notes">
-          <span class="adm-nav-icon">📝</span>
-          <span>Araştırma Notları</span>
-        </button>
-        <button type="button" class="adm-nav-item" data-target="sec-blog">
-          <span class="adm-nav-icon">✍️</span>
-          <span>Blog Yazıları (Yayınla)</span>
-        </button>
-        <button type="button" class="adm-nav-item" data-target="sec-education">
+        <button type="button" class="adm-nav-item" data-target="sec-academics">
           <span class="adm-nav-icon">🎓</span>
-          <span>Eğitim & Yol Haritası</span>
-        </button>
-        <button type="button" class="adm-nav-item" data-target="sec-achievements">
-          <span class="adm-nav-icon">🏆</span>
-          <span>Kilometre Taşları</span>
+          <span>Akademik & Yetkinlikler</span>
         </button>
         <button type="button" class="adm-nav-item" data-target="sec-interests">
           <span class="adm-nav-icon">🎸</span>
-          <span>Kişisel İlgi Alanları</span>
+          <span>İlgi Alanları</span>
         </button>
         <button type="button" class="adm-nav-item" data-target="sec-contact">
           <span class="adm-nav-icon">📬</span>
           <span>İletişim & Footer</span>
+        </button>
+        <button type="button" class="adm-nav-item" data-target="sec-blog">
+          <span class="adm-nav-icon">✍️</span>
+          <span>Blog Yazıları</span>
         </button>
         <button type="button" class="adm-nav-item" data-target="sec-settings">
           <span class="adm-nav-icon">⚙️</span>
@@ -156,9 +140,31 @@
               <input type="text" id="inp-doc_title" class="adm-field-input">
             </div>
 
-            <div class="adm-field-group">
-              <label class="adm-field-label">Durum Rozeti (Status Pill)</label>
-              <input type="text" id="inp-hero_status" class="adm-field-input">
+            <!-- Navigation Links -->
+            <div class="adm-card-editor" style="margin-bottom: 0.5rem;">
+              <div class="adm-card-editor-header">🧭 Üst Menü / Navigasyon Başlıkları</div>
+              <div class="adm-grid-2">
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Menü: Hakkımda</label>
+                  <input type="text" id="inp-nav_about" class="adm-field-input">
+                </div>
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Menü: Projeler</label>
+                  <input type="text" id="inp-nav_projects" class="adm-field-input">
+                </div>
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Menü: Akademik & Yetkinlikler</label>
+                  <input type="text" id="inp-nav_academics" class="adm-field-input">
+                </div>
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Menü: İlgi Alanları</label>
+                  <input type="text" id="inp-nav_interests" class="adm-field-input">
+                </div>
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Menü: İletişim</label>
+                  <input type="text" id="inp-nav_contact" class="adm-field-input">
+                </div>
+              </div>
             </div>
 
             <div class="adm-field-group">
@@ -169,111 +175,64 @@
 
             <div class="adm-field-group">
               <label class="adm-field-label">Alt Açıklama (Subtitle / Lead)</label>
-              <textarea id="inp-hero_subtitle" class="adm-field-textarea" rows="2"></textarea>
+              <textarea id="inp-hero_desc" class="adm-field-textarea" rows="2"></textarea>
             </div>
 
             <div class="adm-grid-2">
               <div class="adm-field-group">
-                <label class="adm-field-label">Etiket 1</label>
+                <label class="adm-field-label">Etiket 1 (Astrofizik)</label>
                 <input type="text" id="inp-tag_astro" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">Etiket 2</label>
+                <label class="adm-field-label">Etiket 2 (Simülasyon)</label>
                 <input type="text" id="inp-tag_sim" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">Etiket 3</label>
+                <label class="adm-field-label">Etiket 3 (Havacılık)</label>
                 <input type="text" id="inp-tag_aero" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">Etiket 4</label>
+                <label class="adm-field-label">Etiket 4 (Yazılım)</label>
                 <input type="text" id="inp-tag_code" class="adm-field-input">
               </div>
             </div>
 
-            <div class="adm-grid-3">
+            <div class="adm-grid-2">
               <div class="adm-field-group">
-                <label class="adm-field-label">Buton 1 (Projeler)</label>
-                <input type="text" id="inp-cta_work" class="adm-field-input">
+                <label class="adm-field-label">Buton 1 — Projelere Git</label>
+                <input type="text" id="inp-cta_projects" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">Buton 2 (Araştırma)</label>
-                <input type="text" id="inp-cta_research" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Buton 3 (GitHub)</label>
-                <input type="text" id="inp-cta_github" class="adm-field-input">
+                <label class="adm-field-label">Buton 2 — İletişime Geç</label>
+                <input type="text" id="inp-cta_contact" class="adm-field-input">
               </div>
             </div>
 
             <div class="adm-grid-2">
               <div class="adm-field-group">
-                <label class="adm-field-label">Fotoğraf Üst Rozet</label>
+                <label class="adm-field-label">Fotoğraf Üst Rozet (badge_research)</label>
                 <input type="text" id="inp-badge_research" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">Fotoğraf Alt Rozet</label>
+                <label class="adm-field-label">Fotoğraf Alt Rozet (badge_engineering)</label>
                 <input type="text" id="inp-badge_engineering" class="adm-field-input">
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- 2. CURRENTLY WORKING ON -->
-        <div class="adm-section-box" id="sec-working">
-          <div class="adm-box-header">
-            <h3 class="adm-box-title"><span>⚡</span> Güncel Çalışmalar (Currently Working On)</h3>
-            <span class="adm-current-lang-pill current-lang-name">English (EN)</span>
-          </div>
-
-          <div class="adm-form-grid">
-            <div class="adm-field-group">
-              <label class="adm-field-label">Şerit Başlığı</label>
-              <input type="text" id="inp-working_tag" class="adm-field-input">
-            </div>
-
-            <!-- Item 1 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">🪐 Çalışma 1: N-Body Simülasyonu</div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Başlık</label>
-                <input type="text" id="inp-working_1_title" class="adm-field-input">
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">İstatistik 1 — Açıklama (stat_sim_label)</label>
+                <input type="text" id="inp-stat_sim_label" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">Detay</label>
-                <textarea id="inp-working_1_detail" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">🔭 Çalışma 2: Astronomik Veri Analizi</div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Başlık</label>
-                <input type="text" id="inp-working_2_title" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Detay</label>
-                <textarea id="inp-working_2_detail" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">📐 Çalışma 3: Fizik & Matematik</div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Başlık</label>
-                <input type="text" id="inp-working_3_title" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Detay</label>
-                <textarea id="inp-working_3_detail" class="adm-field-textarea" rows="2"></textarea>
+                <label class="adm-field-label">İstatistik 2 — Açıklama (stat_physics_label)</label>
+                <input type="text" id="inp-stat_physics_label" class="adm-field-input">
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 3. ABOUT SECTION -->
+        <!-- 2. ABOUT SECTION -->
         <div class="adm-section-box" id="sec-about">
           <div class="adm-box-header">
             <h3 class="adm-box-title"><span>👤</span> Hakkımda & Vizyon</h3>
@@ -376,83 +335,10 @@
           </div>
         </div>
 
-        <!-- 4. RESEARCH SECTION -->
-        <div class="adm-section-box" id="sec-research">
-          <div class="adm-box-header">
-            <h3 class="adm-box-title"><span>🔭</span> Araştırma Alanları & Bilimsel Soru</h3>
-            <span class="adm-current-lang-pill current-lang-name">English (EN)</span>
-          </div>
-
-          <div class="adm-form-grid">
-            <div class="adm-grid-2">
-              <div class="adm-field-group">
-                <label class="adm-field-label">Bölüm Etiketi</label>
-                <input type="text" id="inp-research_tag" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Bölüm Başlığı</label>
-                <input type="text" id="inp-research_title" class="adm-field-input">
-              </div>
-            </div>
-
-            <!-- Research Domain 1 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">🪐 Alan 1: Hesaplamalı Astrofizik</div>
-              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
-                <label class="adm-field-label">Alan Başlığı</label>
-                <input type="text" id="inp-research_area_1_title" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Açıklama</label>
-                <textarea id="inp-research_area_1_desc" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-
-            <!-- Research Domain 2 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">🔭 Alan 2: Astrofizik & Ötegezegenler</div>
-              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
-                <label class="adm-field-label">Alan Başlığı</label>
-                <input type="text" id="inp-research_area_2_title" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Açıklama</label>
-                <textarea id="inp-research_area_2_desc" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-
-            <!-- Research Domain 3 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">🚀 Alan 3: Havacılık & Yörünge Dinamiği</div>
-              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
-                <label class="adm-field-label">Alan Başlığı</label>
-                <input type="text" id="inp-research_area_3_title" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Açıklama</label>
-                <textarea id="inp-research_area_3_desc" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-
-            <!-- Current Research Question Box -->
-            <div class="adm-card-editor" style="border-color: #6366f1;">
-              <div class="adm-card-editor-header">💡 Güncel Araştırma Sorusu</div>
-              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
-                <label class="adm-field-label">Soru Kutusu Etiketi</label>
-                <input type="text" id="inp-rq_label" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Araştırma Sorusu Metni</label>
-                <textarea id="inp-rq_text" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. PROJECTS SECTION -->
+        <!-- 3. PROJECTS SECTION -->
         <div class="adm-section-box" id="sec-projects">
           <div class="adm-box-header">
-            <h3 class="adm-box-title"><span>🪐</span> Araştırma Projeleri</h3>
+            <h3 class="adm-box-title"><span>🪐</span> Öne Çıkan Projeler</h3>
             <span class="adm-current-lang-pill current-lang-name">English (EN)</span>
           </div>
 
@@ -473,152 +359,108 @@
               <textarea id="inp-projects_desc" class="adm-field-textarea" rows="2"></textarea>
             </div>
 
-            <!-- Project 1: N-Body -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">Proje 1: N-Body Simulation</div>
-              <div class="adm-grid-3" style="margin-bottom: 0.75rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Proje Başlığı</label>
-                  <input type="text" id="inp-p1_title" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Durum (Status)</label>
-                  <input type="text" id="inp-p1_status" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Tarih / Başlangıç</label>
-                  <input type="text" id="inp-p1_date" class="adm-field-input">
-                </div>
-              </div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Çalışma Alanı (Field)</label>
-                <input type="text" id="inp-p1_field" class="adm-field-input">
-              </div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Genel Açıklama (Overview)</label>
-                <textarea id="inp-p1_desc" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">✔️ Ne Yaptım (What I've Done)</label>
-                <textarea id="inp-p1_done" class="adm-field-textarea" rows="2"></textarea>
+            <!-- Filter Labels -->
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Filtre: Tüm Projeler</label>
+                <input type="text" id="inp-filter_all" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">🔬 Ne Üzerinde Çalışıyorum (What I'm Working On)</label>
-                <textarea id="inp-p1_wip" class="adm-field-textarea" rows="2"></textarea>
+                <label class="adm-field-label">Filtre: Fizik & Simülasyon</label>
+                <input type="text" id="inp-filter_physics" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Filtre: Yazılım & IoT</label>
+                <input type="text" id="inp-filter_software" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Filtre: Sosyal İnovasyon</label>
+                <input type="text" id="inp-filter_civic" class="adm-field-input">
               </div>
             </div>
 
-            <!-- Project 2: Soil Analysis -->
+            <!-- Project 1 -->
             <div class="adm-card-editor">
-              <div class="adm-card-editor-header">Proje 2: Soil Analysis & Smart Agronomy</div>
-              <div class="adm-grid-3" style="margin-bottom: 0.75rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Proje Başlığı</label>
-                  <input type="text" id="inp-p2_title" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Durum (Status)</label>
-                  <input type="text" id="inp-p2_status" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Tarih</label>
-                  <input type="text" id="inp-p2_date" class="adm-field-input">
-                </div>
-              </div>
+              <div class="adm-card-editor-header">🪐 Proje 1: N-Body Simulation</div>
               <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Çalışma Alanı</label>
-                <input type="text" id="inp-p2_field" class="adm-field-input">
-              </div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Genel Açıklama</label>
-                <textarea id="inp-p2_desc" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">✔️ Ne Yaptım</label>
-                <textarea id="inp-p2_done" class="adm-field-textarea" rows="2"></textarea>
+                <label class="adm-field-label">Proje Başlığı</label>
+                <input type="text" id="inp-p1_title" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">🔬 Ne Üzerinde Çalışıyorum</label>
-                <textarea id="inp-p2_wip" class="adm-field-textarea" rows="2"></textarea>
+                <label class="adm-field-label">Proje Açıklaması</label>
+                <textarea id="inp-p1_desc" class="adm-field-textarea" rows="3"></textarea>
               </div>
             </div>
 
-            <!-- Project 3: Wildfire -->
+            <!-- Project 2 -->
             <div class="adm-card-editor">
-              <div class="adm-card-editor-header">Proje 3: Wildfire Early Warning Station</div>
-              <div class="adm-grid-3" style="margin-bottom: 0.75rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Proje Başlığı</label>
-                  <input type="text" id="inp-p3_title" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Durum</label>
-                  <input type="text" id="inp-p3_status" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Tarih</label>
-                  <input type="text" id="inp-p3_date" class="adm-field-input">
-                </div>
-              </div>
+              <div class="adm-card-editor-header">📱 Proje 2: Soil Analysis App</div>
               <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Çalışma Alanı</label>
-                <input type="text" id="inp-p3_field" class="adm-field-input">
-              </div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Genel Açıklama</label>
-                <textarea id="inp-p3_desc" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">✔️ Ne Yaptım</label>
-                <textarea id="inp-p3_done" class="adm-field-textarea" rows="2"></textarea>
+                <label class="adm-field-label">Proje Başlığı</label>
+                <input type="text" id="inp-p2_title" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">🔬 Ne Üzerinde Çalışıyorum</label>
-                <textarea id="inp-p3_wip" class="adm-field-textarea" rows="2"></textarea>
+                <label class="adm-field-label">Proje Açıklaması</label>
+                <textarea id="inp-p2_desc" class="adm-field-textarea" rows="3"></textarea>
               </div>
             </div>
 
-            <!-- Project 4: Modular Clinics -->
+            <!-- Project 3 -->
             <div class="adm-card-editor">
-              <div class="adm-card-editor-header">Proje 4: Modular Healthcare Clinics</div>
-              <div class="adm-grid-3" style="margin-bottom: 0.75rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Proje Başlığı</label>
-                  <input type="text" id="inp-p4_title" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Durum</label>
-                  <input type="text" id="inp-p4_status" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Tarih</label>
-                  <input type="text" id="inp-p4_date" class="adm-field-input">
-                </div>
-              </div>
+              <div class="adm-card-editor-header">🔥 Proje 3: Wildfire Detection Station</div>
               <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Çalışma Alanı</label>
-                <input type="text" id="inp-p4_field" class="adm-field-input">
-              </div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">Genel Açıklama</label>
-                <textarea id="inp-p4_desc" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
-                <label class="adm-field-label">✔️ Ne Yaptım</label>
-                <textarea id="inp-p4_done" class="adm-field-textarea" rows="2"></textarea>
+                <label class="adm-field-label">Proje Başlığı</label>
+                <input type="text" id="inp-p3_title" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">🔬 Ne Üzerinde Çalışıyorum</label>
-                <textarea id="inp-p4_wip" class="adm-field-textarea" rows="2"></textarea>
+                <label class="adm-field-label">Proje Açıklaması</label>
+                <textarea id="inp-p3_desc" class="adm-field-textarea" rows="3"></textarea>
+              </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="adm-card-editor">
+              <div class="adm-card-editor-header">🏥 Proje 4: Modular Healthcare Clinics</div>
+              <div class="adm-field-group" style="margin-bottom: 0.75rem;">
+                <label class="adm-field-label">Proje Başlığı</label>
+                <input type="text" id="inp-p4_title" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Proje Açıklaması</label>
+                <textarea id="inp-p4_desc" class="adm-field-textarea" rows="3"></textarea>
+              </div>
+            </div>
+
+            <!-- Category & Architecture Labels -->
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Mimari Bileşenler Etiketi</label>
+                <input type="text" id="inp-arch_title" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Kategori: Hesaplamalı Fizik</label>
+                <input type="text" id="inp-cat_physics" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Kategori: Yazılım & Donanım</label>
+                <input type="text" id="inp-cat_software" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Kategori: IoT & Erken Uyarı</label>
+                <input type="text" id="inp-cat_iot" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Kategori: Sosyal İnovasyon & Mimari</label>
+                <input type="text" id="inp-cat_civic" class="adm-field-input">
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 6. RESEARCH NOTES SECTION -->
-        <div class="adm-section-box" id="sec-notes">
+        <!-- 4. ACADEMICS & SKILLS SECTION -->
+        <div class="adm-section-box" id="sec-academics">
           <div class="adm-box-header">
-            <h3 class="adm-box-title"><span>📝</span> Araştırma Notları (Blog)</h3>
+            <h3 class="adm-box-title"><span>🎓</span> Akademik Temeller & Teknik Yetkinlikler</h3>
             <span class="adm-current-lang-pill current-lang-name">English (EN)</span>
           </div>
 
@@ -626,297 +468,115 @@
             <div class="adm-grid-2">
               <div class="adm-field-group">
                 <label class="adm-field-label">Bölüm Etiketi</label>
-                <input type="text" id="inp-notes_tag" class="adm-field-input">
+                <input type="text" id="inp-acad_tag" class="adm-field-input">
               </div>
               <div class="adm-field-group">
                 <label class="adm-field-label">Bölüm Başlığı</label>
-                <input type="text" id="inp-notes_title" class="adm-field-input">
+                <input type="text" id="inp-acad_title" class="adm-field-input">
               </div>
             </div>
 
             <div class="adm-field-group">
               <label class="adm-field-label">Bölüm Açıklaması</label>
-              <textarea id="inp-notes_desc" class="adm-field-textarea" rows="2"></textarea>
+              <textarea id="inp-acad_desc" class="adm-field-textarea" rows="2"></textarea>
             </div>
 
-            <!-- Note 1 -->
+            <!-- Fizik & Matematik Kartı -->
             <div class="adm-card-editor">
-              <div class="adm-card-editor-header">Not 1</div>
-              <div class="adm-grid-2" style="margin-bottom: 0.5rem;">
+              <div class="adm-card-editor-header">⚛️ Kart 1: Fizik & Matematik</div>
+              <div class="adm-grid-2" style="margin-bottom: 0.75rem;">
                 <div class="adm-field-group">
-                  <label class="adm-field-label">Kategori</label>
-                  <input type="text" id="inp-note_1_cat" class="adm-field-input">
+                  <label class="adm-field-label">Kart Başlığı</label>
+                  <input type="text" id="inp-sk_phys_title" class="adm-field-input">
                 </div>
                 <div class="adm-field-group">
-                  <label class="adm-field-label">Tarih</label>
-                  <input type="text" id="inp-note_1_date" class="adm-field-input">
+                  <label class="adm-field-label">Kart Alt Başlığı</label>
+                  <input type="text" id="inp-sk_phys_sub" class="adm-field-input">
                 </div>
+              </div>
+              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
+                <label class="adm-field-label">AP Physics 1 açıklaması</label>
+                <textarea id="inp-sk_ap1" class="adm-field-textarea" rows="2"></textarea>
+              </div>
+              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
+                <label class="adm-field-label">AP Physics C açıklaması</label>
+                <textarea id="inp-sk_apc" class="adm-field-textarea" rows="2"></textarea>
+              </div>
+              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
+                <label class="adm-field-label">TÜBİTAK Astronomi açıklaması</label>
+                <textarea id="inp-sk_tubitak" class="adm-field-textarea" rows="2"></textarea>
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">Başlık</label>
-                <input type="text" id="inp-note_1_title" class="adm-field-input">
-              </div>
-            </div>
-
-            <!-- Note 2 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">Not 2</div>
-              <div class="adm-grid-2" style="margin-bottom: 0.5rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Kategori</label>
-                  <input type="text" id="inp-note_2_cat" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Tarih</label>
-                  <input type="text" id="inp-note_2_date" class="adm-field-input">
-                </div>
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Başlık</label>
-                <input type="text" id="inp-note_2_title" class="adm-field-input">
+                <label class="adm-field-label">Hesaplamalı Modelleme açıklaması</label>
+                <textarea id="inp-sk_comp_math" class="adm-field-textarea" rows="2"></textarea>
               </div>
             </div>
 
-            <!-- Note 3 -->
+            <!-- Yazılım & Hesaplama Kartı -->
             <div class="adm-card-editor">
-              <div class="adm-card-editor-header">Not 3</div>
-              <div class="adm-grid-2" style="margin-bottom: 0.5rem;">
+              <div class="adm-card-editor-header">💻 Kart 2: Yazılım & Hesaplama</div>
+              <div class="adm-grid-2" style="margin-bottom: 0.75rem;">
                 <div class="adm-field-group">
-                  <label class="adm-field-label">Kategori</label>
-                  <input type="text" id="inp-note_3_cat" class="adm-field-input">
+                  <label class="adm-field-label">Kart Başlığı</label>
+                  <input type="text" id="inp-sk_code_title" class="adm-field-input">
                 </div>
                 <div class="adm-field-group">
-                  <label class="adm-field-label">Tarih</label>
-                  <input type="text" id="inp-note_3_date" class="adm-field-input">
+                  <label class="adm-field-label">Kart Alt Başlığı</label>
+                  <input type="text" id="inp-sk_code_sub" class="adm-field-input">
                 </div>
               </div>
+              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
+                <label class="adm-field-label">Python açıklaması</label>
+                <textarea id="inp-sk_py" class="adm-field-textarea" rows="2"></textarea>
+              </div>
+              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
+                <label class="adm-field-label">C# açıklaması</label>
+                <textarea id="inp-sk_csharp" class="adm-field-textarea" rows="2"></textarea>
+              </div>
+              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
+                <label class="adm-field-label">Flutter açıklaması</label>
+                <textarea id="inp-sk_flutter" class="adm-field-textarea" rows="2"></textarea>
+              </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">Başlık</label>
-                <input type="text" id="inp-note_3_title" class="adm-field-input">
+                <label class="adm-field-label">Git & GitHub açıklaması</label>
+                <textarea id="inp-sk_git" class="adm-field-textarea" rows="2"></textarea>
+              </div>
+            </div>
+
+            <!-- Donanım & Vizyon Kartı -->
+            <div class="adm-card-editor">
+              <div class="adm-card-editor-header">🔧 Kart 3: Donanım & Vizyon</div>
+              <div class="adm-grid-2" style="margin-bottom: 0.75rem;">
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Kart Başlığı</label>
+                  <input type="text" id="inp-sk_hw_title" class="adm-field-input">
+                </div>
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Kart Alt Başlığı</label>
+                  <input type="text" id="inp-sk_hw_sub" class="adm-field-input">
+                </div>
+              </div>
+              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
+                <label class="adm-field-label">ESP32 & Sensör açıklaması</label>
+                <textarea id="inp-sk_esp" class="adm-field-textarea" rows="2"></textarea>
+              </div>
+              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
+                <label class="adm-field-label">NASA Space Apps açıklaması</label>
+                <textarea id="inp-sk_space" class="adm-field-textarea" rows="2"></textarea>
+              </div>
+              <div class="adm-field-group" style="margin-bottom: 0.5rem;">
+                <label class="adm-field-label">Fotoğrafçılık açıklaması</label>
+                <textarea id="inp-sk_photo" class="adm-field-textarea" rows="2"></textarea>
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Dil yetkinlikleri açıklaması</label>
+                <textarea id="inp-sk_lang" class="adm-field-textarea" rows="2"></textarea>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- BLOG YÖNETİMİ SECTION -->
-        <div class="adm-section-box" id="sec-blog">
-          <div class="adm-box-header">
-            <h3 class="adm-box-title"><span>✍️</span> Blog Yazıları Yönetimi</h3>
-            <button type="button" class="btn-adm btn-adm-publish" onclick="openBlogEditor()">
-              <span>➕ Yeni Yazı Ekle</span>
-            </button>
-          </div>
-
-          <!-- Inline Blog Post Editor (Add / Edit) -->
-          <div class="adm-blog-editor-card" id="blog-editor-card">
-            <h4 id="blog-editor-heading" style="font-size: 1.1rem; color: #a5b4fc; margin-bottom: 1.25rem;">Yeni Blog Yazısı Ekle</h4>
-            <input type="hidden" id="blog-edit-id">
-
-            <div class="adm-form-grid">
-              <div class="adm-field-group">
-                <label class="adm-field-label">Yazı Başlığı</label>
-                <input type="text" id="blog-edit-title" class="adm-field-input" placeholder="Örn: Euler İntegrasyonu Neden Başarısız Olur?">
-              </div>
-
-              <div class="adm-grid-3">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Kategori</label>
-                  <input type="text" id="blog-edit-category" class="adm-field-input" placeholder="Örn: Astrofizik, Hesaplamalı Fizik...">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Yayın Tarihi</label>
-                  <input type="date" id="blog-edit-date" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Okuma Süresi</label>
-                  <input type="text" id="blog-edit-readtime" class="adm-field-input" placeholder="Örn: 4 dk okuma">
-                </div>
-              </div>
-
-              <div class="adm-field-group">
-                <label class="adm-field-label">Kısa Özet (Listede görünecek açıklama)</label>
-                <textarea id="blog-edit-summary" class="adm-field-textarea" rows="2" placeholder="Yazının kısa bir özeti..."></textarea>
-              </div>
-
-              <div class="adm-field-group">
-                <label class="adm-field-label">Tam Yazı İçeriği (Paragraflar ve başlıklar)</label>
-                <textarea id="blog-edit-content" class="adm-field-textarea" rows="7" placeholder="Yazınızın tamamını buraya yazın. Alt başlıklar için ### Başlık şeklinde yazabilirsiniz."></textarea>
-              </div>
-
-              <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
-                <button type="button" class="btn-adm btn-adm-save" onclick="saveBlogPostForm()">
-                  <span>💾 Yazıyı Kaydet</span>
-                </button>
-                <button type="button" class="btn-adm btn-adm-preview" onclick="closeBlogEditor()">
-                  <span>İptal</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Current Posts List in Admin -->
-          <div class="adm-blog-list" id="adm-blog-list-container">
-            <!-- Rendered by admin.js -->
-          </div>
-        </div>
-
-        <!-- 7. EDUCATION SECTION -->
-        <div class="adm-section-box" id="sec-education">
-          <div class="adm-box-header">
-            <h3 class="adm-box-title"><span>🎓</span> Eğitim & Yol Haritası</h3>
-            <span class="adm-current-lang-pill current-lang-name">English (EN)</span>
-          </div>
-
-          <div class="adm-form-grid">
-            <div class="adm-grid-2">
-              <div class="adm-field-group">
-                <label class="adm-field-label">Bölüm Etiketi</label>
-                <input type="text" id="inp-edu_tag" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Bölüm Başlığı</label>
-                <input type="text" id="inp-edu_title" class="adm-field-input">
-              </div>
-            </div>
-
-            <!-- Edu 1 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">1. Lise Eğitimi</div>
-              <div class="adm-grid-2" style="margin-bottom: 0.5rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Dönem</label>
-                  <input type="text" id="inp-edu_1_period" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Başlık</label>
-                  <input type="text" id="inp-edu_1_title" class="adm-field-input">
-                </div>
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Açıklama</label>
-                <textarea id="inp-edu_1_sub" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-
-            <!-- Edu 2 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">2. AP Physics C</div>
-              <div class="adm-grid-2" style="margin-bottom: 0.5rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Dönem</label>
-                  <input type="text" id="inp-edu_2_period" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Başlık</label>
-                  <input type="text" id="inp-edu_2_title" class="adm-field-input">
-                </div>
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Açıklama</label>
-                <textarea id="inp-edu_2_sub" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-
-            <!-- Edu 3 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">3. AP Physics 1</div>
-              <div class="adm-grid-2" style="margin-bottom: 0.5rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Dönem</label>
-                  <input type="text" id="inp-edu_3_period" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Başlık</label>
-                  <input type="text" id="inp-edu_3_title" class="adm-field-input">
-                </div>
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Açıklama</label>
-                <textarea id="inp-edu_3_sub" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-
-            <!-- Edu 4 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">4. TÜBİTAK Astronomi</div>
-              <div class="adm-grid-2" style="margin-bottom: 0.5rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Dönem</label>
-                  <input type="text" id="inp-edu_4_period" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Başlık</label>
-                  <input type="text" id="inp-edu_4_title" class="adm-field-input">
-                </div>
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Açıklama</label>
-                <textarea id="inp-edu_4_sub" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8. ACHIEVEMENTS SECTION -->
-        <div class="adm-section-box" id="sec-achievements">
-          <div class="adm-box-header">
-            <h3 class="adm-box-title"><span>🏆</span> Kilometre Taşları & Yarışmalar</h3>
-            <span class="adm-current-lang-pill current-lang-name">English (EN)</span>
-          </div>
-
-          <div class="adm-form-grid">
-            <div class="adm-grid-2">
-              <div class="adm-field-group">
-                <label class="adm-field-label">Bölüm Etiketi</label>
-                <input type="text" id="inp-achievements_tag" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Bölüm Başlığı</label>
-                <input type="text" id="inp-achievements_title" class="adm-field-input">
-              </div>
-            </div>
-
-            <!-- Milestone 1 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">🚀 Başarı 1: NASA Space Apps</div>
-              <div class="adm-grid-2" style="margin-bottom: 0.5rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Başlık</label>
-                  <input type="text" id="inp-ach_1_title" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Yıl / Durum</label>
-                  <input type="text" id="inp-ach_1_year" class="adm-field-input">
-                </div>
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Açıklama</label>
-                <textarea id="inp-ach_1_desc" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-
-            <!-- Milestone 2 -->
-            <div class="adm-card-editor">
-              <div class="adm-card-editor-header">🌟 Başarı 2: TÜBİTAK Ulusal Astronomi</div>
-              <div class="adm-grid-2" style="margin-bottom: 0.5rem;">
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Başlık</label>
-                  <input type="text" id="inp-ach_2_title" class="adm-field-input">
-                </div>
-                <div class="adm-field-group">
-                  <label class="adm-field-label">Yıl / Durum</label>
-                  <input type="text" id="inp-ach_2_year" class="adm-field-input">
-                </div>
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Açıklama</label>
-                <textarea id="inp-ach_2_desc" class="adm-field-textarea" rows="2"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 9. PERSONAL INTERESTS -->
+        <!-- 5. INTERESTS SECTION -->
         <div class="adm-section-box" id="sec-interests">
           <div class="adm-box-header">
             <h3 class="adm-box-title"><span>🎸</span> Kişisel İlgi Alanları</h3>
@@ -976,7 +636,7 @@
           </div>
         </div>
 
-        <!-- 10. CONTACT & FOOTER -->
+        <!-- 6. CONTACT & FOOTER -->
         <div class="adm-section-box" id="sec-contact">
           <div class="adm-box-header">
             <h3 class="adm-box-title"><span>📬</span> İletişim & Footer</h3>
@@ -1006,9 +666,47 @@
                 <input type="text" id="inp-email_label" class="adm-field-input">
               </div>
               <div class="adm-field-group">
-                <label class="adm-field-label">Konum Değeri</label>
-                <input type="text" id="inp-loc_val" class="adm-field-input">
+                <label class="adm-field-label">Konum Etiketi</label>
+                <input type="text" id="inp-loc_label" class="adm-field-input">
               </div>
+            </div>
+
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Ad Soyad etiketi</label>
+                <input type="text" id="inp-form_name" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Ad Soyad ipucu (Placeholder)</label>
+                <input type="text" id="inp-form_name_ph" class="adm-field-input">
+              </div>
+            </div>
+
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Konu etiketi</label>
+                <input type="text" id="inp-form_subject" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Konu ipucu (Placeholder)</label>
+                <input type="text" id="inp-form_subj_ph" class="adm-field-input">
+              </div>
+            </div>
+
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Mesaj etiketi</label>
+                <input type="text" id="inp-form_msg" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Mesaj ipucu (Placeholder)</label>
+                <input type="text" id="inp-form_msg_ph" class="adm-field-input">
+              </div>
+            </div>
+
+            <div class="adm-field-group">
+              <label class="adm-field-label">E-Posta Gönder Butonu</label>
+              <input type="text" id="inp-btn_send_email" class="adm-field-input">
             </div>
 
             <div class="adm-field-group">
@@ -1020,10 +718,15 @@
               <label class="adm-field-label">Telif Hakkı Metni</label>
               <input type="text" id="inp-footer_rights" class="adm-field-input">
             </div>
+
+            <div class="adm-field-group">
+              <label class="adm-field-label">Başa Dön Butonu</label>
+              <input type="text" id="inp-back_top" class="adm-field-input">
+            </div>
           </div>
         </div>
 
-        <!-- BLOG MANAGEMENT SECTION -->
+        <!-- 7. BLOG MANAGEMENT -->
         <div class="adm-section-box" id="sec-blog">
           <div class="adm-box-header">
             <h3 class="adm-box-title"><span>✍️</span> Blog Yazıları — İçerik Yönetimi</h3>
@@ -1093,7 +796,7 @@
           </div>
         </div>
 
-        <!-- 11. SETTINGS & GITHUB API -->
+        <!-- 8. SETTINGS & GITHUB API -->
         <div class="adm-section-box" id="sec-settings">
           <div class="adm-box-header">
             <h3 class="adm-box-title"><span>⚙️</span> Ayarlar & GitHub Canlı Yayın Entegrasyonu</h3>

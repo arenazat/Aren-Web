@@ -18,22 +18,18 @@ const DEFAULT_PASSCODE = 'aren2026';
 
 // All input fields mapping to content.json keys
 const ALL_KEYS = [
-  // Document
+  // Document & Header Navigation
   'doc_title',
+  'nav_about', 'nav_projects', 'nav_academics', 'nav_interests', 'nav_contact',
 
-  // Hero
-  'hero_status', 'hero_title', 'hero_subtitle',
+  // Hero Section
+  'hero_title', 'hero_desc',
   'tag_astro', 'tag_sim', 'tag_aero', 'tag_code',
-  'cta_work', 'cta_research', 'cta_github',
+  'cta_projects', 'cta_contact',
   'badge_research', 'badge_engineering',
+  'stat_sim_label', 'stat_physics_label',
 
-  // Currently Working On
-  'working_tag',
-  'working_1_title', 'working_1_detail',
-  'working_2_title', 'working_2_detail',
-  'working_3_title', 'working_3_detail',
-
-  // About
+  // About Section
   'about_tag', 'about_title', 'about_story_title',
   'about_p1', 'about_p2', 'about_p3',
   'sig_name', 'sig_title',
@@ -42,49 +38,35 @@ const ALL_KEYS = [
   'pillar_3_title', 'pillar_3_desc',
   'pillar_4_title', 'pillar_4_desc',
 
-  // Research Domains
-  'research_tag', 'research_title',
-  'research_area_1_title', 'research_area_1_desc',
-  'research_area_2_title', 'research_area_2_desc',
-  'research_area_3_title', 'research_area_3_desc',
-  'rq_label', 'rq_text',
-
-  // Projects
+  // Projects Section
   'projects_tag', 'projects_title', 'projects_desc',
-  'p1_title', 'p1_status', 'p1_date', 'p1_field', 'p1_desc', 'p1_done', 'p1_wip',
-  'p2_title', 'p2_status', 'p2_date', 'p2_field', 'p2_desc', 'p2_done', 'p2_wip',
-  'p3_title', 'p3_status', 'p3_date', 'p3_field', 'p3_desc', 'p3_done', 'p3_wip',
-  'p4_title', 'p4_status', 'p4_date', 'p4_field', 'p4_desc', 'p4_done', 'p4_wip',
+  'filter_all', 'filter_physics', 'filter_software', 'filter_civic',
+  'p1_title', 'p1_desc',
+  'p2_title', 'p2_desc',
+  'p3_title', 'p3_desc',
+  'p4_title', 'p4_desc',
+  'arch_title',
+  'cat_physics', 'cat_software', 'cat_iot', 'cat_civic',
 
-  // Research Notes
-  'notes_tag', 'notes_title', 'notes_desc',
-  'note_1_cat', 'note_1_title', 'note_1_date',
-  'note_2_cat', 'note_2_title', 'note_2_date',
-  'note_3_cat', 'note_3_title', 'note_3_date',
+  // Academics & Skills Section
+  'acad_tag', 'acad_title', 'acad_desc',
+  'sk_phys_title', 'sk_phys_sub', 'sk_ap1', 'sk_apc', 'sk_tubitak', 'sk_comp_math',
+  'sk_code_title', 'sk_code_sub', 'sk_py', 'sk_csharp', 'sk_flutter', 'sk_git',
+  'sk_hw_title', 'sk_hw_sub', 'sk_esp', 'sk_space', 'sk_photo', 'sk_lang',
 
-  // Education
-  'edu_tag', 'edu_title',
-  'edu_1_period', 'edu_1_title', 'edu_1_sub',
-  'edu_2_period', 'edu_2_title', 'edu_2_sub',
-  'edu_3_period', 'edu_3_title', 'edu_3_sub',
-  'edu_4_period', 'edu_4_title', 'edu_4_sub',
-
-  // Milestones
-  'achievements_tag', 'achievements_title',
-  'ach_1_title', 'ach_1_desc', 'ach_1_year',
-  'ach_2_title', 'ach_2_desc', 'ach_2_year',
-
-  // Interests
+  // Interests Section
   'int_tag', 'int_title',
   'int_guitar_title', 'int_guitar_desc',
   'int_tennis_title', 'int_tennis_desc',
   'int_photo_title', 'int_photo_desc',
 
-  // Contact & Footer
+  // Contact & Footer Section
   'contact_tag', 'contact_title', 'contact_desc',
-  'email_label', 'loc_label', 'loc_val',
-  'form_name', 'form_subject', 'form_msg',
-  'btn_send_email', 'quote_text', 'footer_rights'
+  'email_label', 'loc_label',
+  'form_name', 'form_name_ph',
+  'form_subject', 'form_subj_ph',
+  'form_msg', 'form_msg_ph',
+  'btn_send_email', 'quote_text', 'footer_rights', 'back_top'
 ];
 
 // ==========================================================================
