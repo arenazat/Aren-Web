@@ -110,13 +110,13 @@
           <span class="adm-nav-icon">🎸</span>
           <span>İlgi Alanları</span>
         </button>
+        <button type="button" class="adm-nav-item" data-target="sec-blog">
+          <span class="adm-nav-icon">✍️</span>
+          <span>Blog & Vitrin</span>
+        </button>
         <button type="button" class="adm-nav-item" data-target="sec-contact">
           <span class="adm-nav-icon">📬</span>
           <span>İletişim & Footer</span>
-        </button>
-        <button type="button" class="adm-nav-item" data-target="sec-blog">
-          <span class="adm-nav-icon">✍️</span>
-          <span>Blog Yazıları</span>
         </button>
         <button type="button" class="adm-nav-item" data-target="sec-settings">
           <span class="adm-nav-icon">⚙️</span>
@@ -640,97 +640,7 @@
           </div>
         </div>
 
-        <!-- 6. CONTACT & FOOTER -->
-        <div class="adm-section-box" id="sec-contact">
-          <div class="adm-box-header">
-            <h3 class="adm-box-title"><span>📬</span> İletişim & Footer</h3>
-            <span class="adm-current-lang-pill current-lang-name">English (EN)</span>
-          </div>
-
-          <div class="adm-form-grid">
-            <div class="adm-grid-2">
-              <div class="adm-field-group">
-                <label class="adm-field-label">Bölüm Etiketi</label>
-                <input type="text" id="inp-contact_tag" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Bölüm Başlığı</label>
-                <input type="text" id="inp-contact_title" class="adm-field-input">
-              </div>
-            </div>
-
-            <div class="adm-field-group">
-              <label class="adm-field-label">İletişim Davet Metni</label>
-              <textarea id="inp-contact_desc" class="adm-field-textarea" rows="2"></textarea>
-            </div>
-
-            <div class="adm-grid-2">
-              <div class="adm-field-group">
-                <label class="adm-field-label">E-Posta Etiketi</label>
-                <input type="text" id="inp-email_label" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Konum Etiketi</label>
-                <input type="text" id="inp-loc_label" class="adm-field-input">
-              </div>
-            </div>
-
-            <div class="adm-grid-2">
-              <div class="adm-field-group">
-                <label class="adm-field-label">Form — Ad Soyad etiketi</label>
-                <input type="text" id="inp-form_name" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Form — Ad Soyad ipucu (Placeholder)</label>
-                <input type="text" id="inp-form_name_ph" class="adm-field-input">
-              </div>
-            </div>
-
-            <div class="adm-grid-2">
-              <div class="adm-field-group">
-                <label class="adm-field-label">Form — Konu etiketi</label>
-                <input type="text" id="inp-form_subject" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Form — Konu ipucu (Placeholder)</label>
-                <input type="text" id="inp-form_subj_ph" class="adm-field-input">
-              </div>
-            </div>
-
-            <div class="adm-grid-2">
-              <div class="adm-field-group">
-                <label class="adm-field-label">Form — Mesaj etiketi</label>
-                <input type="text" id="inp-form_msg" class="adm-field-input">
-              </div>
-              <div class="adm-field-group">
-                <label class="adm-field-label">Form — Mesaj ipucu (Placeholder)</label>
-                <input type="text" id="inp-form_msg_ph" class="adm-field-input">
-              </div>
-            </div>
-
-            <div class="adm-field-group">
-              <label class="adm-field-label">E-Posta Gönder Butonu</label>
-              <input type="text" id="inp-btn_send_email" class="adm-field-input">
-            </div>
-
-            <div class="adm-field-group">
-              <label class="adm-field-label">Footer Alıntı Sözü (Quote)</label>
-              <input type="text" id="inp-quote_text" class="adm-field-input">
-            </div>
-
-            <div class="adm-field-group">
-              <label class="adm-field-label">Telif Hakkı Metni</label>
-              <input type="text" id="inp-footer_rights" class="adm-field-input">
-            </div>
-
-            <div class="adm-field-group">
-              <label class="adm-field-label">Başa Dön Butonu</label>
-              <input type="text" id="inp-back_top" class="adm-field-input">
-            </div>
-          </div>
-        </div>
-
-        <!-- 7. BLOG MANAGEMENT -->
+        <!-- 6. BLOG MANAGEMENT -->
         <div class="adm-section-box" id="sec-blog">
           <div class="adm-box-header">
             <h3 class="adm-box-title"><span>✍️</span> Blog Yazıları & Ana Sayfa Blog Yönetimi</h3>
@@ -846,6 +756,96 @@
           <!-- Blog Posts List -->
           <div class="adm-blog-list" id="adm-blog-list-container">
             <!-- Rendered dynamically by admin.js renderAdminBlogList() -->
+          </div>
+        </div>
+
+        <!-- 7. CONTACT & FOOTER -->
+        <div class="adm-section-box" id="sec-contact">
+          <div class="adm-box-header">
+            <h3 class="adm-box-title"><span>📬</span> İletişim & Footer</h3>
+            <span class="adm-current-lang-pill current-lang-name">English (EN)</span>
+          </div>
+
+          <div class="adm-form-grid">
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Bölüm Etiketi</label>
+                <input type="text" id="inp-contact_tag" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Bölüm Başlığı</label>
+                <input type="text" id="inp-contact_title" class="adm-field-input">
+              </div>
+            </div>
+
+            <div class="adm-field-group">
+              <label class="adm-field-label">İletişim Davet Metni</label>
+              <textarea id="inp-contact_desc" class="adm-field-textarea" rows="2"></textarea>
+            </div>
+
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">E-Posta Etiketi</label>
+                <input type="text" id="inp-email_label" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Konum Etiketi</label>
+                <input type="text" id="inp-loc_label" class="adm-field-input">
+              </div>
+            </div>
+
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Ad Soyad etiketi</label>
+                <input type="text" id="inp-form_name" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Ad Soyad ipucu (Placeholder)</label>
+                <input type="text" id="inp-form_name_ph" class="adm-field-input">
+              </div>
+            </div>
+
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Konu etiketi</label>
+                <input type="text" id="inp-form_subject" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Konu ipucu (Placeholder)</label>
+                <input type="text" id="inp-form_subj_ph" class="adm-field-input">
+              </div>
+            </div>
+
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Mesaj etiketi</label>
+                <input type="text" id="inp-form_msg" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Form — Mesaj ipucu (Placeholder)</label>
+                <input type="text" id="inp-form_msg_ph" class="adm-field-input">
+              </div>
+            </div>
+
+            <div class="adm-field-group">
+              <label class="adm-field-label">E-Posta Gönder Butonu</label>
+              <input type="text" id="inp-btn_send_email" class="adm-field-input">
+            </div>
+
+            <div class="adm-field-group">
+              <label class="adm-field-label">Footer Alıntı Sözü (Quote)</label>
+              <input type="text" id="inp-quote_text" class="adm-field-input">
+            </div>
+
+            <div class="adm-field-group">
+              <label class="adm-field-label">Telif Hakkı Metni</label>
+              <input type="text" id="inp-footer_rights" class="adm-field-input">
+            </div>
+
+            <div class="adm-field-group">
+              <label class="adm-field-label">Başa Dön Butonu</label>
+              <input type="text" id="inp-back_top" class="adm-field-input">
+            </div>
           </div>
         </div>
 

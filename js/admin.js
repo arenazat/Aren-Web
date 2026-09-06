@@ -122,6 +122,22 @@ function handleLogout() {
 // ==========================================================================
 // 3. DATA INITIALIZATION & FORM BINDING
 // ==========================================================================
+// Strict sanitizer: ensures siteData only contains active ALL_KEYS
+function sanitizeSiteData(data) {
+  const clean = { en: {}, tr: {} };
+  ['en', 'tr'].forEach(lang => {
+    clean[lang] = {};
+    if (data && data[lang]) {
+      ALL_KEYS.forEach(key => {
+        if (data[lang][key] !== undefined) {
+          clean[lang][key] = data[lang][key];
+        }
+      });
+    }
+  });
+  return clean;
+}
+
 async function initDashboardData() {
   try {
     // 1. Fetch content.json
@@ -144,6 +160,10 @@ async function initDashboardData() {
       console.error(e);
     }
   }
+
+  // Sanitize immediately to scrub any legacy/obsolete keys from storage
+  siteData = sanitizeSiteData(siteData);
+  localStorage.setItem('aren_custom_translations', JSON.stringify(siteData));
 
   // 3. Fetch blog posts from posts.json
   try {
@@ -235,6 +255,8 @@ function collectFormFields() {
       siteData[editLang][key] = input.value;
     }
   });
+
+  siteData = sanitizeSiteData(siteData);
 }
 
 function switchEditLanguage(lang) {
