@@ -1,0 +1,38 @@
+[
+  {
+    "id": "post-1",
+    "title": "Euler İntegrasyonu Neden Uzun Vadeli Yörünge Simülasyonlarında Başarısız Olur?",
+    "category": "Hesaplamalı Fizik",
+    "categorySlug": "comp-physics",
+    "date": "2026-02-18",
+    "readTime": "4 dk okuma",
+    "summary": "Kütleçekim simülasyonlarında en basit sayısal adım yöntemi olan Euler integratörünün neden enerji korunumunu ihlal ettiğini ve yörüngelerin nasıl dışa doğru saptığını inceliyoruz.",
+    "content": "Kütleçekimsel çok cisim (N-Body) simülasyonları geliştirmeye başlarken karşılaşılan ilk yöntem genellikle standart Euler integrasyonudur:\n\nv(t + dt) = v(t) + a(t) * dt\nx(t + dt) = x(t) + v(t) * dt\n\nBu yöntem kağıt üzerinde mantıklı ve kodlaması son derece kolay görünse de, fiziksel simülasyonlarda ciddi bir sorun barındırır: Euler integratörü semplektik (symplectic) bir yöntem değildir. Yani sistemin faz uzayı hacmini ve toplam mekanik enerjisini korumaz.\n\n### Enerji Sapması (Energy Drift)\nBir gezegenin yıldız etrafındaki eliptik yörüngesini Euler ile simüle ettiğinizde, her adımda ufak bir yapay enerji sisteme eklenir. 10.000 adım sonra gezegenin kapalı bir elips çizmek yerine giderek dışa doğru spiral çizerek sistemden kaçtığını görürsünüz.\n\n### Çözüm: Verlet ve Leapfrog Algoritmaları\nBu sorunu aşmak için konum ve hız adımlarını zaman ekseninde yarım adım kaydıran 'Velocity Verlet' veya 'Leapfrog' algoritması tercih edilmelidir. Bu yöntemler ikinci dereceden doğruluk sunar ve uzun vadeli simülasyonlarda enerjiyi dalgalı ama ortalamada sabit tutarak sistemin kararlılığını sağlar.",
+    "author": "Aren Azat",
+    "lang": "tr"
+  },
+  {
+    "id": "post-2",
+    "title": "İlk N-Body Kütleçekim Simülasyonumu Geliştirirken Neler Öğrendim?",
+    "category": "Astrofizik",
+    "categorySlug": "astrophysics",
+    "date": "2026-01-24",
+    "readTime": "5 dk okuma",
+    "summary": "Python ve Pygame kullanarak sıfırdan çok cisimli kütleçekim motoru yazarken karşılaştığım vektörel hesaplama zorlukları, performans optimizasyonları ve görselleştirme teknikleri.",
+    "content": "Astrofiziğe olan merakımı çalışan bir koda dönüştürmenin en somut yolu bir N-Body simülasyonu yazmaktı. Newton'un evrensel çekim yasası (F = G * m1 * m2 / r^2) teoride basittir, ancak N tane cismin birbirine uyguladığı kuvvetleri bilgisayarda modellemek farklı mühendislik yaklaşımları gerektirir.\n\n### 1. Vektörel Hız ve Çarpışma Mantığı\nCisimler arasındaki mesafe vektörünü doğru hesaplamak ve r sıfıra yaklaştığında kuvvetin sonsuza fırlamasını (singularity) önlemek için bir 'yumuşatma parametresi' (softening factor, epsilon) eklemek şarttır. Aksi halde birbirine çok yaklaşan iki cisim aşırı yüksek hızla evrenin dışına fırlayabilir.\n\n### 2. Algoritmik Karmaşıklık: O(N^2)\nCismin sayısı arttıkça her cismin diğer tüm cisimlerle etkileşimini hesaplamak işlemciyi zorlar. 10 cisim için 100 işlem gerekirken, 1.000 cisim için her adımda 1.000.000 kuvvet hesabı gerekir. Bu aşamada NumPy matris operasyonları ve ileride Barnes-Hut ağaç algoritmalarının önemi ortaya çıkıyor.\n\n### 3. Gelecek Adımlar\nBir sonraki aşamada üç boyutlu (3D) uzay koordinatları ve relativistik düzeltmeleri (Genel Görelilik perihelion kayması) modele dahil etmeyi planlıyorum.",
+    "author": "Aren Azat",
+    "lang": "tr"
+  },
+  {
+    "id": "post-3",
+    "title": "Toprak Analizi Sensörlerinde Analog Kalibrasyon ve Veri Filtreleme",
+    "category": "Yazılım & IoT",
+    "categorySlug": "software-iot",
+    "date": "2025-11-12",
+    "readTime": "3 dk okuma",
+    "summary": "Toprak pH ve nem problarından gelen analog sinyallerdeki elektriksel gürültüyü temizlemek için C# ve mikrodenetleyici tarafında uyguladığım hareketli ortalama filtreleri.",
+    "content": "Akıllı tarım ve toprak analiz platformu projemde, sensör problarından alınan analog gerilim değerleri doğrudan pH veya nem yüzdesine çevrildiğinde çevresel elektriksel parazitlerden ötürü ciddi dalgalanmalar yaşanıyordu.\n\n### Donanım ve Yazılım Katmanları Arasındaki İletişim\nSensör probları topraktaki iletkenlik üzerinden mikrodenetleyiciye analog sinyal iletir. Bu sinyali C# veri hattına aktarmadan önce donanım seviyesinde kapasitör filtreleme ve yazılım seviyesinde 10 adımlık 'Moving Average' (Hareketli Ortalama) filtresi uyguladım.\n\n### Sonuç ve Mobil Entegrasyon\nFiltrelenmiş ve kalibre edilmiş veri akışı, Android Flutter mobil arayüzünde pürüzsüz grafikler ve tutarlı tarımsal tavsiyeler üretilmesini sağladı.",
+    "author": "Aren Azat",
+    "lang": "tr"
+  }
+]

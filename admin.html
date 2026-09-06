@@ -114,6 +114,10 @@
           <span class="adm-nav-icon">📝</span>
           <span>Araştırma Notları</span>
         </button>
+        <button type="button" class="adm-nav-item" data-target="sec-blog">
+          <span class="adm-nav-icon">✍️</span>
+          <span>Blog Yazıları (Yayınla)</span>
+        </button>
         <button type="button" class="adm-nav-item" data-target="sec-education">
           <span class="adm-nav-icon">🎓</span>
           <span>Eğitim & Yol Haritası</span>
@@ -694,6 +698,68 @@
           </div>
         </div>
 
+        <!-- BLOG YÖNETİMİ SECTION -->
+        <div class="adm-section-box" id="sec-blog">
+          <div class="adm-box-header">
+            <h3 class="adm-box-title"><span>✍️</span> Blog Yazıları Yönetimi</h3>
+            <button type="button" class="btn-adm btn-adm-publish" onclick="openBlogEditor()">
+              <span>➕ Yeni Yazı Ekle</span>
+            </button>
+          </div>
+
+          <!-- Inline Blog Post Editor (Add / Edit) -->
+          <div class="adm-blog-editor-card" id="blog-editor-card">
+            <h4 id="blog-editor-heading" style="font-size: 1.1rem; color: #a5b4fc; margin-bottom: 1.25rem;">Yeni Blog Yazısı Ekle</h4>
+            <input type="hidden" id="blog-edit-id">
+
+            <div class="adm-form-grid">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Yazı Başlığı</label>
+                <input type="text" id="blog-edit-title" class="adm-field-input" placeholder="Örn: Euler İntegrasyonu Neden Başarısız Olur?">
+              </div>
+
+              <div class="adm-grid-3">
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Kategori</label>
+                  <input type="text" id="blog-edit-category" class="adm-field-input" placeholder="Örn: Astrofizik, Hesaplamalı Fizik...">
+                </div>
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Yayın Tarihi</label>
+                  <input type="date" id="blog-edit-date" class="adm-field-input">
+                </div>
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Okuma Süresi</label>
+                  <input type="text" id="blog-edit-readtime" class="adm-field-input" placeholder="Örn: 4 dk okuma">
+                </div>
+              </div>
+
+              <div class="adm-field-group">
+                <label class="adm-field-label">Kısa Özet (Listede görünecek açıklama)</label>
+                <textarea id="blog-edit-summary" class="adm-field-textarea" rows="2" placeholder="Yazının kısa bir özeti..."></textarea>
+              </div>
+
+              <div class="adm-field-group">
+                <label class="adm-field-label">Tam Yazı İçeriği (Paragraflar ve başlıklar)</label>
+                <textarea id="blog-edit-content" class="adm-field-textarea" rows="7" placeholder="Yazınızın tamamını buraya yazın. Alt başlıklar için ### Başlık şeklinde yazabilirsiniz."></textarea>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+                <button type="button" class="btn-adm btn-adm-save" onclick="saveBlogPostForm()">
+                  <span>💾 Yazıyı Kaydet</span>
+                </button>
+                <button type="button" class="btn-adm btn-adm-preview" onclick="closeBlogEditor()">
+                  <span>İptal</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Current Posts List in Admin -->
+          <div class="adm-blog-list" id="adm-blog-list-container">
+            <!-- Rendered by admin.js -->
+          </div>
+        </div>
+
         <!-- 7. EDUCATION SECTION -->
         <div class="adm-section-box" id="sec-education">
           <div class="adm-box-header">
@@ -954,6 +1020,76 @@
               <label class="adm-field-label">Telif Hakkı Metni</label>
               <input type="text" id="inp-footer_rights" class="adm-field-input">
             </div>
+          </div>
+        </div>
+
+        <!-- BLOG MANAGEMENT SECTION -->
+        <div class="adm-section-box" id="sec-blog">
+          <div class="adm-box-header">
+            <h3 class="adm-box-title"><span>✍️</span> Blog Yazıları — İçerik Yönetimi</h3>
+          </div>
+
+          <div class="adm-blog-topbar">
+            <p style="font-size: 0.85rem; color: var(--adm-text-muted);">
+              Blog yazılarını buradan ekleyebilir, düzenleyebilir veya silebilirsiniz. Değişiklikler için üst çubuktan <strong>🚀 Canlıya Yayınla</strong> butonunu kullanın.
+            </p>
+            <button type="button" class="btn-adm btn-adm-publish" onclick="openBlogEditor()">
+              ✏️ Yeni Yazı Ekle
+            </button>
+          </div>
+
+          <!-- Blog Post Editor Card (hidden by default) -->
+          <div class="adm-blog-editor-card" id="blog-editor-card">
+            <h4 id="blog-editor-heading" style="margin-bottom: 1.25rem; color: #a5b4fc; font-size: 1.05rem;">Yeni Blog Yazısı Ekle</h4>
+            <input type="hidden" id="blog-edit-id">
+
+            <div class="adm-form-grid">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Yazı Başlığı *</label>
+                <input type="text" id="blog-edit-title" class="adm-field-input" placeholder="Örn: N-Body Simülasyonunda Enerji Korunumu...">
+              </div>
+
+              <div class="adm-grid-2">
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Kategori</label>
+                  <input type="text" id="blog-edit-category" class="adm-field-input" placeholder="Örn: Hesaplamalı Fizik">
+                </div>
+                <div class="adm-field-group">
+                  <label class="adm-field-label">Yayın Tarihi</label>
+                  <input type="date" id="blog-edit-date" class="adm-field-input">
+                </div>
+              </div>
+
+              <div class="adm-field-group">
+                <label class="adm-field-label">Okuma Süresi</label>
+                <input type="text" id="blog-edit-readtime" class="adm-field-input" placeholder="Örn: 4 dk okuma">
+              </div>
+
+              <div class="adm-field-group">
+                <label class="adm-field-label">Özet (Kart önizlemesi)</label>
+                <textarea id="blog-edit-summary" class="adm-field-textarea" rows="2" placeholder="Yazının kısa özeti..."></textarea>
+              </div>
+
+              <div class="adm-field-group">
+                <label class="adm-field-label">Tam İçerik</label>
+                <textarea id="blog-edit-content" class="adm-field-textarea" rows="10" placeholder="Yazının tam içeriği. ## ile başlayan satırlar başlık, ### ile alt başlık olur. Paragraflar arasında boş satır bırakın."></textarea>
+                <span class="adm-field-hint">## Başlık, ### Alt Başlık olarak formatlanır. Paragrafları boş satırla ayırın.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap;">
+              <button type="button" class="btn-adm btn-adm-publish" onclick="saveBlogPostForm()">
+                💾 Yazıyı Kaydet
+              </button>
+              <button type="button" class="btn-adm btn-adm-logout" onclick="closeBlogEditor()">
+                ✕ İptal
+              </button>
+            </div>
+          </div>
+
+          <!-- Blog Posts List -->
+          <div class="adm-blog-list" id="adm-blog-list-container">
+            <!-- Rendered dynamically by admin.js renderAdminBlogList() -->
           </div>
         </div>
 

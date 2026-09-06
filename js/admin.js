@@ -7,6 +7,7 @@
 // 1. GLOBAL STATE & CONFIGURATION
 // ==========================================================================
 let siteData = { en: {}, tr: {} };
+let sitePosts = []; // All blog posts
 let editLang = 'en'; // Current active editing language tab
 
 // GitHub Repository & Default Configuration
@@ -158,13 +159,39 @@ async function initDashboardData() {
     }
   }
 
-  // 3. Populate fields for current active language
+  // 3. Fetch blog posts from posts.json
+  try {
+    const pRes = await fetch('./data/posts.json?v=' + Date.now());
+    if (pRes.ok) {
+      sitePosts = await pRes.json();
+    }
+  } catch (err) {
+    console.warn('posts.json yüklenemedi, yerel veriye bakılıyor.', err);
+  }
+
+  // 4. Merge local storage custom blog posts
+  const localPosts = localStorage.getItem('aren_custom_posts');
+  if (localPosts) {
+    try {
+      const parsedPosts = JSON.parse(localPosts);
+      if (Array.isArray(parsedPosts) && parsedPosts.length > 0) {
+        sitePosts = parsedPosts;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // 5. Populate fields for current active language
   populateFormFields();
 
-  // 4. Populate settings values
+  // 6. Render admin blog list
+  renderAdminBlogList();
+
+  // 7. Populate settings values
   const tokenInput = document.getElementById('setting-gh-token');
   if (tokenInput) {
-    tokenInput.value = localStorage.getItem('aren_gh_token') || DEFAULT_PAT_TOKEN;
+    tokenInput.value = localStorage.getItem('aren_gh_token') || '';
   }
 }
 
@@ -305,7 +332,46 @@ async function publishToGitHub() {
     });
 
     if (putRes.ok) {
-      showToast('🚀 Canlıya Başarıyla Yayınlandı! GitHub Pages ~30 saniye içinde tüm dünyada güncellenecektir.', 'success');
+      // Step 4: Also commit data/posts.json to GitHub
+      try {
+        const postsFilePath = 'data/posts.json';
+        const postsApiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${postsFilePath}`;
+        let postsSha = '';
+        const getPostsRes = await fetch(postsApiUrl, {
+          headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        if (getPostsRes.ok) {
+          const postsData = await getPostsRes.json();
+          postsSha = postsData.sha;
+        }
+
+        const postsJsonString = JSON.stringify(sitePosts, null, 2);
+        const encodedPosts = btoa(unescape(encodeURIComponent(postsJsonString)));
+
+        const putPostsPayload = {
+          message: `chore: update blog posts via admin panel [${new Date().toISOString()}]`,
+          content: encodedPosts,
+          branch: 'main'
+        };
+        if (postsSha) putPostsPayload.sha = postsSha;
+
+        await fetch(postsApiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(putPostsPayload)
+        });
+      } catch (postErr) {
+        console.warn('Posts publish warning:', postErr);
+      }
+
+      showToast('🚀 Canlıya Başarıyla Yayınlandı! Site içeriği ve blog yazıları ~30 saniye içinde güncellenecektir.', 'success');
     } else {
       const err = await putRes.json();
       console.error('GitHub API error:', err);
@@ -320,6 +386,155 @@ async function publishToGitHub() {
       publishBtn.innerHTML = originalText;
     }
   }
+}
+
+// ==========================================================================
+// 5. BLOG POSTS CRUD CONTROLLER
+// ==========================================================================
+function renderAdminBlogList() {
+  const container = document.getElementById('adm-blog-list-container');
+  if (!container) return;
+
+  if (sitePosts.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 2rem; color: var(--adm-text-muted);">
+        Henüz blog yazısı bulunmuyor. Yeni bir yazı eklemek için yukarıdaki butona tıklayın.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = sitePosts.map(post => `
+    <div class="adm-blog-item" data-id="${post.id}">
+      <div class="adm-blog-item-info">
+        <div class="adm-blog-item-title">${escapeHtml(post.title)}</div>
+        <div class="adm-blog-item-meta">
+          <span style="color: #a5b4fc; font-weight: 600;">📁 ${escapeHtml(post.category || 'Genel')}</span>
+          <span>📅 ${escapeHtml(post.date || '')}</span>
+          <span>⏱️ ${escapeHtml(post.readTime || '')}</span>
+        </div>
+      </div>
+      <div class="adm-blog-item-actions">
+        <button type="button" class="btn-adm btn-adm-preview" onclick="openBlogEditor('${post.id}')">
+          ✏️ Düzenle
+        </button>
+        <button type="button" class="btn-adm btn-adm-logout" onclick="deleteBlogPost('${post.id}')">
+          🗑️ Sil
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openBlogEditor(postId = null) {
+  const card = document.getElementById('blog-editor-card');
+  const heading = document.getElementById('blog-editor-heading');
+  const idInput = document.getElementById('blog-edit-id');
+  const titleInput = document.getElementById('blog-edit-title');
+  const catInput = document.getElementById('blog-edit-category');
+  const dateInput = document.getElementById('blog-edit-date');
+  const timeInput = document.getElementById('blog-edit-readtime');
+  const sumInput = document.getElementById('blog-edit-summary');
+  const contentInput = document.getElementById('blog-edit-content');
+
+  if (!card) return;
+
+  if (postId) {
+    const post = sitePosts.find(p => p.id === postId);
+    if (!post) return;
+    if (heading) heading.textContent = 'Blog Yazısını Düzenle';
+    if (idInput) idInput.value = post.id;
+    if (titleInput) titleInput.value = post.title || '';
+    if (catInput) catInput.value = post.category || '';
+    if (dateInput) dateInput.value = post.date || '';
+    if (timeInput) timeInput.value = post.readTime || '';
+    if (sumInput) sumInput.value = post.summary || '';
+    if (contentInput) contentInput.value = post.content || '';
+  } else {
+    if (heading) heading.textContent = 'Yeni Blog Yazısı Ekle';
+    if (idInput) idInput.value = '';
+    if (titleInput) titleInput.value = '';
+    if (catInput) catInput.value = 'Astrofizik';
+    if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
+    if (timeInput) timeInput.value = '4 dk okuma';
+    if (sumInput) sumInput.value = '';
+    if (contentInput) contentInput.value = '';
+  }
+
+  card.style.display = 'block';
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeBlogEditor() {
+  const card = document.getElementById('blog-editor-card');
+  if (card) card.style.display = 'none';
+}
+
+function saveBlogPostForm() {
+  const idInput = document.getElementById('blog-edit-id');
+  const titleInput = document.getElementById('blog-edit-title');
+  const catInput = document.getElementById('blog-edit-category');
+  const dateInput = document.getElementById('blog-edit-date');
+  const timeInput = document.getElementById('blog-edit-readtime');
+  const sumInput = document.getElementById('blog-edit-summary');
+  const contentInput = document.getElementById('blog-edit-content');
+
+  const title = titleInput ? titleInput.value.trim() : '';
+  if (!title) {
+    showToast('Lütfen bir yazı başlığı girin.', 'error');
+    return;
+  }
+
+  const postId = idInput && idInput.value ? idInput.value : ('post-' + Date.now());
+  const category = catInput ? catInput.value.trim() : 'Genel';
+  const date = dateInput && dateInput.value ? dateInput.value : new Date().toISOString().split('T')[0];
+  const readTime = timeInput ? timeInput.value.trim() : '3 dk okuma';
+  const summary = sumInput ? sumInput.value.trim() : '';
+  const content = contentInput ? contentInput.value.trim() : '';
+
+  const postObj = {
+    id: postId,
+    title,
+    category,
+    date,
+    readTime,
+    summary,
+    content,
+    author: 'Aren Azat',
+    lang: 'tr'
+  };
+
+  const existingIdx = sitePosts.findIndex(p => p.id === postId);
+  if (existingIdx >= 0) {
+    sitePosts[existingIdx] = postObj;
+    showToast('Blog yazısı güncellendi!', 'success');
+  } else {
+    sitePosts.unshift(postObj);
+    showToast('Yeni blog yazısı başarıyla eklendi!', 'success');
+  }
+
+  localStorage.setItem('aren_custom_posts', JSON.stringify(sitePosts));
+  renderAdminBlogList();
+  closeBlogEditor();
+}
+
+function deleteBlogPost(postId) {
+  const post = sitePosts.find(p => p.id === postId);
+  const title = post ? post.title : 'Bu yazıyı';
+
+  if (confirm(`"${title}" başlıklı yazıyı silmek istediğinizden emin misiniz?`)) {
+    sitePosts = sitePosts.filter(p => p.id !== postId);
+    localStorage.setItem('aren_custom_posts', JSON.stringify(sitePosts));
+    renderAdminBlogList();
+    showToast('Yazı silindi.', 'info');
+  }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
 }
 
 // Option C: Export JSON

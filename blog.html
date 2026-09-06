@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Araştırma Notları | Aren Azat</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Aren Azat — Astrofizik, hesaplamalı fizik, N-Body simülasyonları, gömülü sistemler ve yazılım geliştirme üzerine araştırma notları ve makaleler.">
+  <meta name="keywords" content="Aren Azat Blog, Astrofizik, N-Body, Fizik Simülasyonu, Python, Flutter, Bilim">
+  <meta name="author" content="Aren Azat">
+  <meta property="og:title" content="Blog & Araştırma Notları | Aren Azat">
+  <meta property="og:description" content="Astrofizik, hesaplamalı fizik simülasyonları ve yazılım üzerine teknik makaleler.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arenazat.github.io/Aren-Web/blog.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%232563EB'/><circle cx='50' cy='50' r='20' fill='%23ffffff'/><circle cx='75' cy='30' r='8' fill='%2360A5FA'/></svg>">
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/main.css?v=20260906b">
+  <link rel="stylesheet" href="./css/components.css?v=20260906b">
+</head>
+<body>
+
+  <!-- Background Ambient Glow & Grid -->
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <div class="ambient-orbit-1" aria-hidden="true"></div>
+  <div class="ambient-orbit-2" aria-hidden="true"></div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="./index.html" class="brand-logo" aria-label="Aren Azat Ana Sayfa">
+        <span class="logo-circle"></span>
+        <span class="logo-text">Aren Azat</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" aria-label="Ana Gezinti">
+        <ul class="nav-list">
+          <li><a href="./index.html#about" class="nav-link">Hakkımda</a></li>
+          <li><a href="./index.html#projects" class="nav-link">Projeler</a></li>
+          <li><a href="./index.html#academics" class="nav-link">Akademik & Yetkinlikler</a></li>
+          <li><a href="./index.html#interests" class="nav-link">İlgi Alanları</a></li>
+          <li><a href="./blog.html" class="nav-link active">Blog</a></li>
+          <li><a href="./index.html#contact" class="nav-link">İletişim</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="nav-actions">
+        <!-- GitHub Profile Link -->
+        <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline btn-github" id="nav-github-link">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" class="mobile-toggle" id="mobile-menu-toggle" aria-label="Menüyü Aç/Kapat" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <ul class="mobile-nav-list">
+        <li><a href="./index.html#about" class="mobile-link">Hakkımda</a></li>
+        <li><a href="./index.html#projects" class="mobile-link">Projeler</a></li>
+        <li><a href="./index.html#academics" class="mobile-link">Akademik & Yetkinlikler</a></li>
+        <li><a href="./index.html#interests" class="mobile-link">İlgi Alanları</a></li>
+        <li><a href="./blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="./index.html#contact" class="mobile-link">İletişim</a></li>
+      </ul>
+      <div class="mobile-actions">
+        <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer" class="btn btn-outline w-full">
+          GitHub Profili
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Blog Header Section -->
+    <section class="blog-header-section">
+      <div class="container">
+        <h1 class="blog-hero-title">Araştırma Notları & Bilimsel Blog</h1>
+        <p class="blog-hero-lead">
+          Hesaplamalı fizik simülasyonları, gök mekaniği, sensör sistemleri ve yazılım geliştirme üzerine öğrendiklerim, deneylerim ve teknik notlarım.
+        </p>
+
+        <!-- Search & Category Filters -->
+        <div class="blog-controls-wrapper">
+          <div class="blog-search-box">
+            <span class="blog-search-icon">🔍</span>
+            <input type="text" id="blog-search-input" class="blog-search-input" placeholder="Yazılarda veya konularda ara...">
+          </div>
+
+          <div class="blog-category-bar" id="category-filter-bar">
+            <!-- Rendered dynamically by blog.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="blog-grid-section">
+      <div class="container">
+        <div class="blog-grid" id="blog-grid">
+          <!-- Rendered dynamically by blog.js -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="blog-empty-state" id="blog-empty-state">
+          <div class="icon">🔭</div>
+          <h3>Bu kategoride henüz yazı bulunmuyor</h3>
+          <p>Yeni makaleler çok yakında eklenecektir.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Reader Modal -->
+  <div class="reader-modal-overlay" id="reader-modal" role="dialog" aria-modal="true">
+    <div class="reader-modal-card">
+      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Kapat">✕</button>
+      
+      <div class="modal-meta-row">
+        <span class="blog-pill-category" id="modal-category">Astrofizik</span>
+        <span class="blog-meta-time" id="modal-read-time">4 dk okuma</span>
+        <span class="dot">•</span>
+        <span class="blog-meta-date" id="modal-date">2026-02-18</span>
+      </div>
+
+      <h2 class="modal-title" id="modal-title">Yazı Başlığı</h2>
+
+      <div class="modal-author-bar">
+        <img src="./assets/images/aren-portrait.jpg" alt="Aren Azat" class="modal-author-avatar" onerror="this.src='./assets/images/default-avatar.svg'">
+        <div>
+          <div class="modal-author-name" id="modal-author">Aren Azat</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted);">Lise Araştırmacısı & Geliştirici</div>
+        </div>
+      </div>
+
+      <div class="modal-body" id="modal-body">
+        <!-- Full content rendered by blog.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-quote">
+        <blockquote>"Bir yerlerde inanılmaz bir şey keşfedilmeyi bekliyor."</blockquote>
+        <cite>— Carl Sagan</cite>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © <span id="current-year">2026</span> Aren Azat. Tüm hakları saklıdır.
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span class="dot">•</span>
+          <a href="mailto:arenazat@gmail.com">arenazat@gmail.com</a>
+          <span class="dot">•</span>
+          <a href="./admin.html">Admin</a>
+          <span class="dot">•</span>
+          <a href="#header" class="back-to-top">Başa Dön ↑</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/blog.js?v=20260906b"></script>
+</body>
+</html>
