@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aren Azat | Astrofizik, Hesaplamalı Fizik & Yazılım</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Aren Azat - Astrofizik, hesaplamalı fizik simülasyonları, havacılık ve yazılım mühendisliği üzerine çalışan lise araştırmacısı ve geliştirici.">
+  <meta name="keywords" content="Aren Azat, Astrofizik, Hesaplamalı Fizik, N-Body Simülasyonu, Python, Flutter, Havacılık, Bilim, Portfolio">
+  <meta name="author" content="Aren Azat">
+  <meta property="og:title" content="Aren Azat | Kişisel Web Sitesi">
+  <meta property="og:description" content="Astrofizik, hesaplamalı simülasyonlar ve mühendislik projeleri.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arenazat.github.io/">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%232563EB'/><circle cx='50' cy='50' r='20' fill='%23ffffff'/><circle cx='75' cy='30' r='8' fill='%2360A5FA'/></svg>">
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/components.css">
+</head>
+<body>
+
+  <!-- Background Ambient Glow & Grid -->
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <div class="ambient-orbit-1" aria-hidden="true"></div>
+  <div class="ambient-orbit-2" aria-hidden="true"></div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header" id="header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" aria-label="Aren Azat Ana Sayfa">
+        <span class="logo-circle"></span>
+        <span class="logo-text">Aren Azat</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" aria-label="Ana Gezinti">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link" data-i18n="nav_about">Hakkımda</a></li>
+          <li><a href="#projects" class="nav-link" data-i18n="nav_projects">Projeler</a></li>
+          <li><a href="#academics" class="nav-link" data-i18n="nav_academics">Akademik & Yetkinlikler</a></li>
+          <li><a href="#interests" class="nav-link" data-i18n="nav_interests">İlgi Alanları</a></li>
+          <li><a href="#contact" class="nav-link" data-i18n="nav_contact">İletişim</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Controls (Language Switcher & GitHub CTA) -->
+      <div class="nav-actions">
+        <!-- Language Switcher Pill -->
+        <div class="lang-switcher" role="group" aria-label="Dil Seçimi">
+          <button type="button" class="lang-btn active" data-lang="tr" id="btn-tr" title="Türkçe">TR</button>
+          <span class="lang-divider">/</span>
+          <button type="button" class="lang-btn" data-lang="en" id="btn-en" title="English">EN</button>
+        </div>
+
+        <!-- GitHub Profile Link -->
+        <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline btn-github" id="nav-github-link">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" class="mobile-toggle" id="mobile-menu-toggle" aria-label="Menüyü Aç/Kapat" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <ul class="mobile-nav-list">
+        <li><a href="#about" class="mobile-link" data-i18n="nav_about">Hakkımda</a></li>
+        <li><a href="#projects" class="mobile-link" data-i18n="nav_projects">Projeler</a></li>
+        <li><a href="#academics" class="mobile-link" data-i18n="nav_academics">Akademik & Yetkinlikler</a></li>
+        <li><a href="#interests" class="mobile-link" data-i18n="nav_interests">İlgi Alanları</a></li>
+        <li><a href="#contact" class="mobile-link" data-i18n="nav_contact">İletişim</a></li>
+      </ul>
+      <div class="mobile-actions">
+        <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer" class="btn btn-outline w-full">
+          GitHub Profili
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <!-- Hero Text -->
+        <div class="hero-content">
+          <div class="status-badge" id="hero-badge">
+            <span class="pulse-dot"></span>
+            <span data-i18n="hero_status">Genç Araştırmacı & Yazılım Geliştirici</span>
+          </div>
+
+          <h1 class="hero-title" data-i18n="hero_title">
+            Astrofizik, Hesaplamalı Fizik ve Mühendislik ile <span class="text-gradient">Evreni Keşfetmek.</span>
+          </h1>
+
+          <p class="hero-subtitle" data-i18n="hero_desc">
+            Merhaba, ben Aren Azat. Antalya'da lise öğrencisiyim. Astrofizik, yerçekimsel kütleçekim simülasyonları, gömülü sistemler ve yazılım mühendisliği üzerine çalışıyorum; bilimsel merakı çalışan kodlara ve somut araştırmalara dönüştürüyorum.
+          </p>
+
+          <!-- Key Highlights Tags -->
+          <div class="hero-tags">
+            <span class="tag"><span class="tag-icon">🔭</span> <span data-i18n="tag_astro">Astrofizik & Astronomi</span></span>
+            <span class="tag"><span class="tag-icon">⚛️</span> <span data-i18n="tag_sim">Hesaplamalı Simülasyon</span></span>
+            <span class="tag"><span class="tag-icon">🚀</span> <span data-i18n="tag_aero">Havacılık & Uzay</span></span>
+            <span class="tag"><span class="tag-icon">💻</span> <span data-i18n="tag_code">Python & Flutter</span></span>
+          </div>
+
+          <!-- Hero CTAs -->
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn btn-primary" id="btn-explore-projects">
+              <span data-i18n="cta_projects">Projeleri İncele</span>
+              <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+            <a href="#contact" class="btn btn-secondary" id="btn-contact-hero" data-i18n="cta_contact">İletişime Geç</a>
+          </div>
+
+          <!-- Quick Stats / Badges -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">N-Body</span>
+              <span class="stat-label" data-i18n="stat_sim_label">Yerçekimi Simülasyonu</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number">AP Physics</span>
+              <span class="stat-label" data-i18n="stat_physics_label">İleri Fizik & Mekanik</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number">Antalya</span>
+              <span class="stat-label" data-i18n="stat_loc_label">Lise 3. Sınıf (11. Sınıf)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Portrait Visual Card -->
+        <div class="hero-visual">
+          <div class="portrait-card-wrapper">
+            <!-- Planetary orbit rings background -->
+            <div class="orbit-ring ring-outer"></div>
+            <div class="orbit-ring ring-inner"></div>
+            <div class="orbit-satellite"></div>
+
+            <div class="portrait-card">
+              <div class="portrait-img-container">
+                <!-- User's portrait image with automated fallback to elegant scientific avatar -->
+                <img 
+                  src="./assets/images/aren-portrait.jpg" 
+                  alt="Aren Azat Portresi" 
+                  class="portrait-img"
+                  id="portrait-image"
+                  onerror="this.onerror=null; this.src='./assets/images/default-avatar.svg';"
+                >
+              </div>
+
+              <!-- Floating Micro-badges -->
+              <div class="float-badge float-badge-top">
+                <span class="badge-icon">🪐</span>
+                <div>
+                  <div class="badge-title">Astrophysics</div>
+                  <div class="badge-sub" data-i18n="badge_research">Araştırma & Gözlem</div>
+                </div>
+              </div>
+
+              <div class="float-badge float-badge-bottom">
+                <span class="badge-icon">🐍</span>
+                <div>
+                  <div class="badge-title">Python 3.14 & C#</div>
+                  <div class="badge-sub" data-i18n="badge_engineering">Mühendislik Kodlama</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="about_tag">HAKKIMDA</span>
+          <h2 class="section-title" data-i18n="about_title">Bilimsel Merak ve Uygulamalı Araştırma</h2>
+          <div class="title-underline"></div>
+        </div>
+
+        <div class="about-grid">
+          <!-- Text Biography -->
+          <div class="about-card narrative-card">
+            <h3 class="about-card-title" data-i18n="about_story_title">Evreni Anlamak, Formülleri Yaşatmak</h3>
+            <p class="about-text" data-i18n="about_p1">
+              Çocukluğumdan beri astronomi, astrofizik ve mekanik sistemlere büyük bir hayranlık besliyorum. Benim için bilim, yalnızca ders kitaplarındaki formülleri ezberlemek değil; onları bilgisayar algoritmalarıyla hayata geçirmek, simülasyonlarla sınamak ve gerçek dünyadaki sorunlara mühendislik çözümleri üretmektir.
+            </p>
+            <p class="about-text" data-i18n="about_p2">
+              Lise eğitimimi sürdürürken bir yandan AP Physics C ve TÜBİTAK Astronomi & Astrofizik olimpiyatları seviyesinde çalışmalar yapıyor, diğer yandan Python ve modern yazılım araçlarıyla sayısal fizik simülasyonları geliştiriyorum. Uzun vadeli hedefim; yurt dışında saygın bir üniversitede astrofizik ve havacılık-uzay mühendisliği eğitimi alarak NASA ve uluslararası araştırma kurumları çatısı altında insanlığın evren anlayışına katkıda bulunmaktır.
+            </p>
+            <p class="about-text" data-i18n="about_p3">
+              Yalnızca teoride kalmayı sevmiyorum. İster N-Body yerçekimsel kütleçekim algoritmaları olsun, ister donanım tabanlı erken orman yangını tespit istasyonları; her projemde sistemi bileşenlerine ayırıp en verimli mimariyle inşa etmeye odaklanıyorum.
+            </p>
+
+            <div class="about-signature">
+              <span class="sig-name">Aren Azat</span>
+              <span class="sig-title" data-i18n="sig_title">Lise Öğrencisi & Araştırmacı — Antalya, Türkiye</span>
+            </div>
+          </div>
+
+          <!-- Feature Cards / Focus Pillars -->
+          <div class="about-pillars">
+            <div class="pillar-card">
+              <div class="pillar-icon">🌌</div>
+              <div class="pillar-body">
+                <h4 data-i18n="pillar_1_title">Astrofizik & Hesaplamalı Simülasyon</h4>
+                <p data-i18n="pillar_1_desc">Gök mekaniği, çoklu cisim çekim etkileşimleri (N-Body) ve sayısal adım integratörleriyle evreni modelleme.</p>
+              </div>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon">🛰️</div>
+              <div class="pillar-body">
+                <h4 data-i18n="pillar_2_title">Havacılık & Uzay Mühendisliği</h4>
+                <p data-i18n="pillar_2_desc">Fiziksel yasaların hava ve uzay araçlarına uygulanması; orbital mekanik ve aerodinamik prensiplere derin ilgi.</p>
+              </div>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon">⚡</div>
+              <div class="pillar-body">
+                <h4 data-i18n="pillar_3_title">Gömülü Sistemler & Sensör Teknolojileri</h4>
+                <p data-i18n="pillar_3_desc">ESP32, IR ve gaz sensörleri, C# veri akışları ve Flutter mobil arayüzleri ile uçtan uca çalışan IoT prototipleri.</p>
+              </div>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon">📐</div>
+              <div class="pillar-body">
+                <h4 data-i18n="pillar_4_title">İleri Matematik & Fizik Temelleri</h4>
+                <p data-i18n="pillar_4_desc">AP Physics 1, AP Physics C ve TÜBİTAK astronomi müfredatıyla derinleşen matematiksel modelleme gücü.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section projects-section" id="projects">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="projects_tag">PORTFOLYO</span>
+          <h2 class="section-title" data-i18n="projects_title">Öne Çıkan Projeler & Araştırmalar</h2>
+          <p class="section-desc" data-i18n="projects_desc">Hesaplamalı fizikten gömülü sistemlere ve afet çözümlerine kadar inşa ettiğim projeler.</p>
+          <div class="title-underline"></div>
+        </div>
+
+        <!-- Projects Filter Buttons -->
+        <div class="filter-group" role="tablist" aria-label="Proje Kategorileri">
+          <button type="button" class="filter-btn active" data-filter="all" data-i18n="filter_all">Tüm Projeler</button>
+          <button type="button" class="filter-btn" data-filter="physics" data-i18n="filter_physics">Fizik & Simülasyon</button>
+          <button type="button" class="filter-btn" data-filter="software" data-i18n="filter_software">Yazılım & IoT</button>
+          <button type="button" class="filter-btn" data-filter="civic" data-i18n="filter_civic">Sosyal İnovasyon</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+
+          <!-- PROJECT 1: N-Body Simulation -->
+          <article class="project-card" data-category="physics">
+            <div class="project-media">
+              <div class="sim-visual-preview">
+                <div class="sim-body-center"></div>
+                <div class="sim-orbit-trail"></div>
+                <div class="sim-body-orbiting orbit-1"></div>
+                <div class="sim-body-orbiting orbit-2"></div>
+                <div class="sim-vector-line"></div>
+                <span class="sim-badge">Python & Pygame</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="cat-badge" data-i18n="cat_physics">Hesaplamalı Fizik</span>
+                <span class="date-badge">2026</span>
+              </div>
+              <h3 class="project-title" data-i18n="p1_title">N-Body Gravitational Simulation</h3>
+              <p class="project-summary" data-i18n="p1_desc">
+                Çoklu gök cisminin birbirine uyguladığı Newton kütleçekim kuvvetlerini sayısal integrasyon algoritmalarıyla (Euler / Verlet) adım adım hesaplayan ve Pygame ile görselleştiren modüler fizik simülasyonu.
+              </p>
+              
+              <div class="project-architecture">
+                <div class="arch-title" data-i18n="arch_title">Mimari Bileşenler:</div>
+                <div class="arch-tags">
+                  <code>body.py</code>
+                  <code>integrator.py</code>
+                  <code>renderer.py</code>
+                  <code>camera.py</code>
+                  <code>simulation.py</code>
+                </div>
+              </div>
+
+              <div class="project-tech-stack">
+                <span class="tech-pill">Python 3.14</span>
+                <span class="tech-pill">Pygame</span>
+                <span class="tech-pill">Sayısal İntegrasyon</span>
+                <span class="tech-pill">Gök Mekaniği</span>
+              </div>
+
+              <div class="project-footer">
+                <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                  </svg>
+                  <span data-i18n="btn_view_github">Depoyu Gör</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 2: Soil Analysis Mobile App -->
+          <article class="project-card" data-category="software">
+            <div class="project-media">
+              <div class="sensor-visual-preview">
+                <div class="sensor-card-mockup">
+                  <div class="sensor-chart-line"></div>
+                  <div class="sensor-pills-row">
+                    <span class="s-pill">pH: 6.8</span>
+                    <span class="s-pill">Nem: %42</span>
+                    <span class="s-pill">24°C</span>
+                  </div>
+                </div>
+                <span class="sim-badge">Flutter & C#</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="cat-badge" data-i18n="cat_software">Yazılım & Donanım</span>
+                <span class="date-badge">2025</span>
+              </div>
+              <h3 class="project-title" data-i18n="p2_title">Toprak Analiz & Akıllı Sensör Uygulaması</h3>
+              <p class="project-summary" data-i18n="p2_desc">
+                Sensörlerden gelen pH, nem ve sıcaklık ölçümlerini C# veri hattı üzerinden alıp Android mobil uygulamada işleyen; geçmiş analiz kartları, istatistikler ve akıllı Türkçe tarım önerileri sunan tam teşekküllü mobil sistem.
+              </p>
+
+              <div class="project-architecture">
+                <div class="arch-title" data-i18n="arch_title">Mimari Bileşenler:</div>
+                <div class="arch-tags">
+                  <code>Flutter UI</code>
+                  <code>StreamBuilder</code>
+                  <code>C# Data Ingest</code>
+                  <code>Stats Engine</code>
+                </div>
+              </div>
+
+              <div class="project-tech-stack">
+                <span class="tech-pill">Flutter / Dart</span>
+                <span class="tech-pill">C# Backend</span>
+                <span class="tech-pill">Android Studio</span>
+                <span class="tech-pill">Sensör Verisi</span>
+              </div>
+
+              <div class="project-footer">
+                <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                  </svg>
+                  <span data-i18n="btn_view_github">Depoyu Gör</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 3: Forest Fire Detection -->
+          <article class="project-card" data-category="software">
+            <div class="project-media">
+              <div class="fire-visual-preview">
+                <div class="tower-diagram">
+                  <div class="tower-sensor sensor-gas"></div>
+                  <div class="tower-sensor sensor-ir"></div>
+                  <div class="tower-sensor sensor-hum"></div>
+                  <div class="irrigation-wave"></div>
+                </div>
+                <span class="sim-badge">ESP32 & Multi-Sensor</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="cat-badge" data-i18n="cat_iot">IoT & Erken Uyarı</span>
+                <span class="date-badge">2025</span>
+              </div>
+              <h3 class="project-title" data-i18n="p3_title">Orman Yangını Erken Tespit & Tampon Sulama İstasyonu</h3>
+              <p class="project-summary" data-i18n="p3_desc">
+                Orman yangınlarını duman ve alev büyümeden önce algılayan bağımsız istasyon konsepti. Galvaniz çelik ve fiberglas kule mimarisi üzerine kurulu ESP32, IR alev sensörü, yanıcı gaz sensörü ve nem sensörleriyle otonom tampon sulama savunması.
+              </p>
+
+              <div class="project-architecture">
+                <div class="arch-title" data-i18n="arch_title">Mimari Bileşenler:</div>
+                <div class="arch-tags">
+                  <code>ESP32 Node</code>
+                  <code>IR & Gas Sensor</code>
+                  <code>Buffer Irrigation</code>
+                  <code>Autonomous Telemetry</code>
+                </div>
+              </div>
+
+              <div class="project-tech-stack">
+                <span class="tech-pill">ESP32</span>
+                <span class="tech-pill">Sensör Füzyonu</span>
+                <span class="tech-pill">Gömülü C++</span>
+                <span class="tech-pill">Donanım Tasarımı</span>
+              </div>
+
+              <div class="project-footer">
+                <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                  </svg>
+                  <span data-i18n="btn_view_github">Depoyu Gör</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 4: Modular Prefabricated Healthcare -->
+          <article class="project-card" data-category="civic">
+            <div class="project-media">
+              <div class="hospital-visual-preview">
+                <div class="mod-clinic-blueprint">
+                  <div class="clinic-cube cube-1"></div>
+                  <div class="clinic-cube cube-2"></div>
+                  <div class="clinic-cross"></div>
+                </div>
+                <span class="sim-badge">Modüler Tasarım</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="cat-badge" data-i18n="cat_civic">Sosyal İnovasyon & Mimari</span>
+                <span class="date-badge">2024</span>
+              </div>
+              <h3 class="project-title" data-i18n="p4_title">Modüler Prefabrik Sağlık Birimleri</h3>
+              <p class="project-summary" data-i18n="p4_desc">
+                6 Şubat depremi sonrasında afet bölgelerindeki gençlerin ve halkın sağlık ile psikososyal ihtiyaçlarına hızlı yanıt veren yenilikçi, minimalist ve hızlı konuşlandırılabilir prefabrik sahra hastanesi vizyonu ve tasarımı.
+              </p>
+
+              <div class="project-architecture">
+                <div class="arch-title" data-i18n="arch_title">Mimari Bileşenler:</div>
+                <div class="arch-tags">
+                  <code>Ergonomic Blueprint</code>
+                  <code>Rapid Deployment</code>
+                  <code>Modular Units</code>
+                  <code>Youth Support</code>
+                </div>
+              </div>
+
+              <div class="project-tech-stack">
+                <span class="tech-pill">Sistem Tasarımı</span>
+                <span class="tech-pill">Afet Yönetimi</span>
+                <span class="tech-pill">Modüler Yapı</span>
+                <span class="tech-pill">Sosyal Etki</span>
+              </div>
+
+              <div class="project-footer">
+                <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                  </svg>
+                  <span data-i18n="btn_view_github">Depoyu Gör</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ACADEMICS & SKILLS SECTION -->
+    <section class="section academics-section" id="academics">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="acad_tag">YOL HARİTASI & YETKİNLİKLER</span>
+          <h2 class="section-title" data-i18n="acad_title">Akademik Temeller ve Teknik Cephanelik</h2>
+          <p class="section-desc" data-i18n="acad_desc">Teorik fizik derinliği ile modern yazılım araçlarının kesişimi.</p>
+          <div class="title-underline"></div>
+        </div>
+
+        <div class="academics-grid">
+          <!-- Column 1: Physics & Math -->
+          <div class="skill-card">
+            <div class="skill-header">
+              <div class="skill-icon-box blue">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(30 12 12)"/>
+                  <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-30 12 12)"/>
+                  <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="skill-card-title" data-i18n="sk_phys_title">Fizik & Matematik</h3>
+                <p class="skill-card-sub" data-i18n="sk_phys_sub">Analitik ve kuramsal temel</p>
+              </div>
+            </div>
+
+            <ul class="skill-items-list">
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>AP Physics 1</strong>
+                  <p data-i18n="sk_ap1">Newton mekaniği, tork, açısal momentum ve dalga mekaniği temelleri tamamlandı.</p>
+                </div>
+              </li>
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>AP Physics C & Kalkülüs</strong>
+                  <p data-i18n="sk_apc">Diferansiyel ve integral temelli ileri klasik mekanik hazırlığı.</p>
+                </div>
+              </li>
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>TÜBİTAK Astronomi & Astrofizik</strong>
+                  <p data-i18n="sk_tubitak">Olimpiyat seviyesinde gök mekaniği, ışınım fiziği ve küresel astronomi çalışmaları.</p>
+                </div>
+              </li>
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>Hesaplamalı Modelleme</strong>
+                  <p data-i18n="sk_comp_math">Sayısal integral, diferansiyel denklem çözücüleri ve vektörel dinamik.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 2: Programming & Software -->
+          <div class="skill-card">
+            <div class="skill-header">
+              <div class="skill-icon-box indigo">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"/>
+                  <polyline points="8 6 2 12 8 18"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="skill-card-title" data-i18n="sk_code_title">Yazılım & Hesaplama</h3>
+                <p class="skill-card-sub" data-i18n="sk_code_sub">Algoritmalar ve araçlar</p>
+              </div>
+            </div>
+
+            <ul class="skill-items-list">
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>Python (3.13 / 3.14) & Pygame</strong>
+                  <p data-i18n="sk_py">Bilimsel simülasyonlar, sanal ortamlar (venv), nesne yönelimli modüler mimari.</p>
+                </div>
+              </li>
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>C# & .NET Temelleri</strong>
+                  <p data-i18n="sk_csharp">Donanım veri akışı, dosya yönetimi ve sistem araçları entegrasyonu.</p>
+                </div>
+              </li>
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>Flutter & Dart (Android)</strong>
+                  <p data-i18n="sk_flutter">Çapraz platform mobil arayüzler, sensör grafikleme, durum yönetimi.</p>
+                </div>
+              </li>
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>Git, GitHub & Terminal</strong>
+                  <p data-i18n="sk_git">Versiyon kontrolü, CI/CD mantığı, VS Code AI ajanları ve komut satırı yetkinliği.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Hardware & Engineering -->
+          <div class="skill-card">
+            <div class="skill-header">
+              <div class="skill-icon-box emerald">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                  <rect x="9" y="9" width="6" height="6"/>
+                  <line x1="9" y1="1" x2="9" y2="4"/>
+                  <line x1="15" y1="1" x2="15" y2="4"/>
+                  <line x1="9" y1="20" x2="9" y2="23"/>
+                  <line x1="15" y1="20" x2="15" y2="23"/>
+                  <line x1="20" y1="9" x2="23" y2="9"/>
+                  <line x1="20" y1="14" x2="23" y2="14"/>
+                  <line x1="1" y1="9" x2="4" y2="9"/>
+                  <line x1="1" y1="14" x2="4" y2="14"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="skill-card-title" data-i18n="sk_hw_title">Donanım & Vizyon</h3>
+                <p class="skill-card-sub" data-i18n="sk_hw_sub">Prototipler ve araştırma</p>
+              </div>
+            </div>
+
+            <ul class="skill-items-list">
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>ESP32 & Sensör Entegrasyonu</strong>
+                  <p data-i18n="sk_esp">IR alev sensörü, yanıcı gaz, bağıl nem ve pH probları ile telemetri tasarımı.</p>
+                </div>
+              </li>
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>NASA Space Apps & Yarışmalar</strong>
+                  <p data-i18n="sk_space">Uzay verisi odaklı problem çözme, takım çalışmaları ve proje geliştirme ilgisi.</p>
+                </div>
+              </li>
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>Fotoğrafçılık & Optik</strong>
+                  <p data-i18n="sk_photo">Canon EOS 550D ile optik diyafram, enstantane, odak uzaklığı ve görsel veri işleme.</p>
+                </div>
+              </li>
+              <li class="skill-list-item">
+                <span class="item-check">✓</span>
+                <div>
+                  <strong>İki Dilli İletişim</strong>
+                  <p data-i18n="sk_lang">Türkçe (Ana dil) ve C1 seviyesinde İngilizce ile uluslararası akademik kaynak takibi.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERESTS SECTION -->
+    <section class="section interests-section" id="interests">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="int_tag">LABORATUVARIN ÖTESİNDE</span>
+          <h2 class="section-title" data-i18n="int_title">Kişisel İlgi Alanları & Çok Yönlülük</h2>
+          <div class="title-underline"></div>
+        </div>
+
+        <div class="interests-grid">
+          <div class="interest-card">
+            <div class="interest-icon">🎸</div>
+            <h3 data-i18n="int_guitar_title">Gitar & Müzik</h3>
+            <p data-i18n="int_guitar_desc">Müzik, analitik düşünceyi yaratıcı ifadeyle buluşturur. Gitar çalmak, yoğun araştırma ve kodlama seansları arasında zihnimi dinlendiren ve harmoni duygusunu besleyen en büyük tutkularımdan biri.</p>
+          </div>
+
+          <div class="interest-card">
+            <div class="interest-icon">🎾</div>
+            <h3 data-i18n="int_tennis_title">Tenis & Spor</h3>
+            <p data-i18n="int_tennis_desc">Fiziksel dayanıklılık, anlık açı ve momentum hesapları ve kortta taktiksel strateji. Tenis oynamak disiplin, yüksek odak ve çeviklik yeteneğimi diri tutar.</p>
+          </div>
+
+          <div class="interest-card">
+            <div class="interest-icon">📷</div>
+            <h3 data-i18n="int_photo_title">Fotoğrafçılık & Optik</h3>
+            <p data-i18n="int_photo_desc">Canon EOS 550D makinemle ışığın, pozlamanın ve lens optiğinin inceliklerini keşfetmek; anı dondurmanın ötesinde optik fiziğini pratik olarak deneyimlememi sağlıyor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div class="contact-grid">
+            <div class="contact-info">
+              <span class="section-tag" data-i18n="contact_tag">İLETİŞİM</span>
+              <h2 class="contact-title" data-i18n="contact_title">Birlikte Yeni Şeyler Keşfedelim</h2>
+              <p class="contact-desc" data-i18n="contact_desc">
+                Astrofizik araştırmaları, simülasyon projeleri, yarışma takımları, akademik mentorluk veya yazılım geliştirme konularında benimle doğrudan iletişime geçebilirsiniz.
+              </p>
+
+              <div class="contact-details">
+                <a href="mailto:arenazat@gmail.com" class="contact-detail-item" id="contact-email-link">
+                  <div class="detail-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="detail-label" data-i18n="email_label">E-Posta</div>
+                    <div class="detail-value">arenazat@gmail.com</div>
+                  </div>
+                </a>
+
+                <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer" class="contact-detail-item" id="contact-github-link">
+                  <div class="detail-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="detail-label">GitHub</div>
+                    <div class="detail-value">github.com/arenazat</div>
+                  </div>
+                </a>
+
+                <div class="contact-detail-item">
+                  <div class="detail-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="detail-label" data-i18n="loc_label">Konum</div>
+                    <div class="detail-value">Antalya, Türkiye</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Direct Message Form -->
+            <div class="contact-form-wrapper">
+              <form class="quick-contact-form" id="contact-form" onsubmit="return handleFormSubmit(event)">
+                <div class="form-group">
+                  <label for="sender-name" class="form-label" data-i18n="form_name">Adınız Soyadınız</label>
+                  <input type="text" id="sender-name" class="form-input" placeholder="Adınız" data-i18n-placeholder="form_name_ph" required>
+                </div>
+                <div class="form-group">
+                  <label for="sender-subject" class="form-label" data-i18n="form_subject">Konu</label>
+                  <input type="text" id="sender-subject" class="form-input" placeholder="Örn: Araştırma veya Proje İş Birliği" data-i18n-placeholder="form_subj_ph" required>
+                </div>
+                <div class="form-group">
+                  <label for="sender-message" class="form-label" data-i18n="form_msg">Mesajınız</label>
+                  <textarea id="sender-message" rows="4" class="form-input" placeholder="Mesajınızı buraya yazabilirsiniz..." data-i18n-placeholder="form_msg_ph" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-full" id="btn-submit-contact">
+                  <span data-i18n="btn_send_email">E-Posta Gönder</span>
+                  <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-quote">
+        <blockquote data-i18n="quote_text">"Bir yerlerde inanılmaz bir şey keşfedilmeyi bekliyor."</blockquote>
+        <cite>— Carl Sagan</cite>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © <span id="current-year">2026</span> Aren Azat. <span data-i18n="footer_rights">Tüm hakları saklıdır.</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/arenazat" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span class="dot">•</span>
+          <a href="mailto:arenazat@gmail.com">arenazat@gmail.com</a>
+          <span class="dot">•</span>
+          <a href="#hero" class="back-to-top" data-i18n="back_top">Başa Dön ↑</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/app.js"></script>
+</body>
+</html>
