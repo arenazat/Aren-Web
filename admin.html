@@ -161,6 +161,10 @@
                   <input type="text" id="inp-nav_interests" class="adm-field-input">
                 </div>
                 <div class="adm-field-group">
+                  <label class="adm-field-label">Menü: Blog</label>
+                  <input type="text" id="inp-nav_blog" class="adm-field-input">
+                </div>
+                <div class="adm-field-group">
                   <label class="adm-field-label">Menü: İletişim</label>
                   <input type="text" id="inp-nav_contact" class="adm-field-input">
                 </div>
@@ -729,13 +733,62 @@
         <!-- 7. BLOG MANAGEMENT -->
         <div class="adm-section-box" id="sec-blog">
           <div class="adm-box-header">
-            <h3 class="adm-box-title"><span>✍️</span> Blog Yazıları — İçerik Yönetimi</h3>
+            <h3 class="adm-box-title"><span>✍️</span> Blog Yazıları & Ana Sayfa Blog Yönetimi</h3>
+            <span class="adm-current-lang-pill current-lang-name">English (EN)</span>
+          </div>
+
+          <!-- Featured 3 Blog Posts on Homepage Picker -->
+          <div class="adm-card-editor" style="margin-bottom: 1.5rem;">
+            <div class="adm-card-editor-header">🏠 Ana Sayfada Öne Çıkan 3 Blog Yazısı</div>
+            <p style="font-size: 0.82rem; color: var(--adm-text-muted); margin-bottom: 1rem;">
+              Ana sayfanızdaki blog vitrininde listelenecek 3 yazıyı aşağıdan seçebilirsiniz. Seçimler anında ana sayfada güncellenir.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+              <div class="adm-field-group">
+                <label class="adm-field-label">1. Öne Çıkan Yazı</label>
+                <select id="inp-featured_blog_1" class="adm-field-input" style="cursor: pointer;"></select>
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">2. Öne Çıkan Yazı</label>
+                <select id="inp-featured_blog_2" class="adm-field-input" style="cursor: pointer;"></select>
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">3. Öne Çıkan Yazı</label>
+                <select id="inp-featured_blog_3" class="adm-field-input" style="cursor: pointer;"></select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Homepage Blog Section Headings Editor -->
+          <div class="adm-card-editor" style="margin-bottom: 1.5rem;">
+            <div class="adm-card-editor-header">📝 Ana Sayfa Blog Bölümü Başlıkları</div>
+            <div class="adm-grid-2">
+              <div class="adm-field-group">
+                <label class="adm-field-label">Bölüm Etiketi (blog_tag)</label>
+                <input type="text" id="inp-blog_tag" class="adm-field-input">
+              </div>
+              <div class="adm-field-group">
+                <label class="adm-field-label">Bölüm Başlığı (blog_title)</label>
+                <input type="text" id="inp-blog_title" class="adm-field-input">
+              </div>
+            </div>
+            <div class="adm-field-group">
+              <label class="adm-field-label">Bölüm Açıklaması (blog_desc)</label>
+              <textarea id="inp-blog_desc" class="adm-field-textarea" rows="2"></textarea>
+            </div>
+            <div class="adm-field-group">
+              <label class="adm-field-label">"Tümünü Gör" Buton Metni (btn_more_blog)</label>
+              <input type="text" id="inp-btn_more_blog" class="adm-field-input">
+            </div>
           </div>
 
           <div class="adm-blog-topbar">
-            <p style="font-size: 0.85rem; color: var(--adm-text-muted);">
-              Blog yazılarını buradan ekleyebilir, düzenleyebilir veya silebilirsiniz. Değişiklikler için üst çubuktan <strong>🚀 Canlıya Yayınla</strong> butonunu kullanın.
-            </p>
+            <div>
+              <h4 style="color: #e2e8f0; font-size: 0.95rem; margin-bottom: 0.25rem;">Tüm Blog Yazıları</h4>
+              <p style="font-size: 0.82rem; color: var(--adm-text-muted);">
+                Blog yazılarını buradan ekleyebilir, düzenleyebilir veya silebilirsiniz.
+              </p>
+            </div>
             <button type="button" class="btn-adm btn-adm-publish" onclick="openBlogEditor()">
               ✏️ Yeni Yazı Ekle
             </button>

@@ -20,7 +20,7 @@ const DEFAULT_PASSCODE = 'aren2026';
 const ALL_KEYS = [
   // Document & Header Navigation
   'doc_title',
-  'nav_about', 'nav_projects', 'nav_academics', 'nav_interests', 'nav_contact',
+  'nav_about', 'nav_projects', 'nav_academics', 'nav_interests', 'nav_blog', 'nav_contact',
 
   // Hero Section
   'hero_title', 'hero_desc',
@@ -59,6 +59,10 @@ const ALL_KEYS = [
   'int_guitar_title', 'int_guitar_desc',
   'int_tennis_title', 'int_tennis_desc',
   'int_photo_title', 'int_photo_desc',
+
+  // Homepage Blog Showcase & Management Section
+  'blog_tag', 'blog_title', 'blog_desc', 'btn_more_blog',
+  'featured_blog_1', 'featured_blog_2', 'featured_blog_3',
 
   // Contact & Footer Section
   'contact_tag', 'contact_title', 'contact_desc',
@@ -177,6 +181,33 @@ async function initDashboardData() {
   }
 }
 
+function populateFeaturedBlogSelects() {
+  const selectIds = ['inp-featured_blog_1', 'inp-featured_blog_2', 'inp-featured_blog_3'];
+  const langData = siteData[editLang] || {};
+
+  selectIds.forEach((selectId, idx) => {
+    const selectEl = document.getElementById(selectId);
+    if (!selectEl) return;
+
+    const key = selectId.replace('inp-', '');
+    const fallbackId = sitePosts[idx] ? sitePosts[idx].id : '';
+    const currentVal = langData[key] || fallbackId;
+
+    selectEl.innerHTML = sitePosts.map(post => {
+      return `<option value="${escapeHtml(post.id)}">${escapeHtml(post.title)} (${escapeHtml(post.category || 'Blog')})</option>`;
+    }).join('');
+
+    if (currentVal) {
+      selectEl.value = currentVal;
+    }
+
+    selectEl.onchange = () => {
+      if (!siteData[editLang]) siteData[editLang] = {};
+      siteData[editLang][key] = selectEl.value;
+    };
+  });
+}
+
 function populateFormFields() {
   // Update indicator pill
   const langPill = document.querySelectorAll('.current-lang-name');
@@ -190,6 +221,9 @@ function populateFormFields() {
       input.value = langData[key] !== undefined ? langData[key] : '';
     }
   });
+
+  // Populate dropdown selects for featured blog posts
+  populateFeaturedBlogSelects();
 }
 
 function collectFormFields() {
@@ -497,6 +531,7 @@ function saveBlogPostForm() {
 
   localStorage.setItem('aren_custom_posts', JSON.stringify(sitePosts));
   renderAdminBlogList();
+  populateFeaturedBlogSelects();
   closeBlogEditor();
 }
 
@@ -508,6 +543,7 @@ function deleteBlogPost(postId) {
     sitePosts = sitePosts.filter(p => p.id !== postId);
     localStorage.setItem('aren_custom_posts', JSON.stringify(sitePosts));
     renderAdminBlogList();
+    populateFeaturedBlogSelects();
     showToast('Yazı silindi.', 'info');
   }
 }

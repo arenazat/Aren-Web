@@ -36,6 +36,15 @@ async function initBlog() {
   initSearch();
   initReaderModal();
   initMobileNav();
+
+  // Check URL query parameters for direct post link (e.g. blog.html?post=post-1)
+  const urlParams = new URLSearchParams(window.location.search);
+  const directPostId = urlParams.get('post');
+  if (directPostId) {
+    setTimeout(() => {
+      openReaderModal(directPostId);
+    }, 150);
+  }
 }
 
 // Render dynamic category pills if needed

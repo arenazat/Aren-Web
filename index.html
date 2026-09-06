@@ -48,7 +48,7 @@
           <li><a href="#projects" class="nav-link" data-i18n="nav_projects">Projeler</a></li>
           <li><a href="#academics" class="nav-link" data-i18n="nav_academics">Akademik & Yetkinlikler</a></li>
           <li><a href="#interests" class="nav-link" data-i18n="nav_interests">İlgi Alanları</a></li>
-          <li><a href="./blog.html" class="nav-link">Blog</a></li>
+          <li><a href="#blog" class="nav-link" data-i18n="nav_blog">Blog</a></li>
           <li><a href="#contact" class="nav-link" data-i18n="nav_contact">İletişim</a></li>
         </ul>
       </nav>
@@ -80,7 +80,7 @@
         <li><a href="#projects" class="mobile-link" data-i18n="nav_projects">Projeler</a></li>
         <li><a href="#academics" class="mobile-link" data-i18n="nav_academics">Akademik & Yetkinlikler</a></li>
         <li><a href="#interests" class="mobile-link" data-i18n="nav_interests">İlgi Alanları</a></li>
-        <li><a href="./blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="#blog" class="mobile-link" data-i18n="nav_blog">Blog</a></li>
         <li><a href="#contact" class="mobile-link" data-i18n="nav_contact">İletişim</a></li>
       </ul>
       <div class="mobile-actions">
@@ -643,6 +643,33 @@
             <h3 data-i18n="int_photo_title">Fotoğrafçılık & Optik</h3>
             <p data-i18n="int_photo_desc">Canon EOS 550D makinemle ışığın, pozlamanın ve lens optiğinin inceliklerini keşfetmek; anı dondurmanın ötesinde optik fiziğini pratik olarak deneyimlememi sağlıyor.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG PREVIEW SECTION -->
+    <section class="section blog-preview-section" id="blog">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag" data-i18n="blog_tag">BİLİMSEL BLOG</span>
+          <h2 class="section-title" data-i18n="blog_title">Son Araştırma Notları & Yazılar</h2>
+          <p class="section-desc" data-i18n="blog_desc">Hesaplamalı fizik simülasyonları, gök mekaniği ve yazılım üzerine teknik notlarım.</p>
+          <div class="title-underline"></div>
+        </div>
+
+        <!-- 3 Featured Blog Posts Grid -->
+        <div class="blog-grid" id="home-blog-grid">
+          <!-- Populated dynamically by app.js from data/posts.json & content.json -->
+        </div>
+
+        <!-- CTA Button to full blog page -->
+        <div class="text-center" style="margin-top: 2.5rem;">
+          <a href="./blog.html" class="btn btn-primary" id="btn-more-blog">
+            <span data-i18n="btn_more_blog">Tüm Yazıları Gör</span>
+            <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </a>
         </div>
       </div>
     </section>

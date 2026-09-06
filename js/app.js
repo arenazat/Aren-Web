@@ -17,6 +17,7 @@ const translations = {
     nav_projects: "Projeler",
     nav_academics: "Akademik & Yetkinlikler",
     nav_interests: "İlgi Alanları",
+    nav_blog: "Blog",
     nav_contact: "İletişim",
 
     // Hero Section
@@ -116,6 +117,15 @@ const translations = {
     int_photo_title: "Fotoğrafçılık & Optik",
     int_photo_desc: "Canon EOS 550D makinemle ışığın, pozlamanın ve lens optiğinin inceliklerini keşfetmek; anı dondurmanın ötesinde optik fiziğini pratik olarak deneyimlememi sağlıyor.",
 
+    // Blog Preview Section
+    blog_tag: "BİLİMSEL BLOG",
+    blog_title: "Son Araştırma Notları & Yazılar",
+    blog_desc: "Hesaplamalı fizik simülasyonları, gök mekaniği ve yazılım üzerine teknik notlarım.",
+    btn_more_blog: "Tüm Yazıları Gör",
+    featured_blog_1: "post-1",
+    featured_blog_2: "post-2",
+    featured_blog_3: "post-3",
+
     // Contact
     contact_tag: "İLETİŞİM",
     contact_title: "Birlikte Yeni Şeyler Keşfedelim",
@@ -146,6 +156,7 @@ const translations = {
     nav_projects: "Projects",
     nav_academics: "Academics & Skills",
     nav_interests: "Interests",
+    nav_blog: "Blog",
     nav_contact: "Contact",
 
     // Hero Section
@@ -245,6 +256,15 @@ const translations = {
     int_photo_title: "Photography & Optics",
     int_photo_desc: "Exploring light, exposure mechanics, and lens optics with my Canon EOS 550D—experiencing the physical principles of optics hands-on beyond capturing moments.",
 
+    // Blog Preview Section
+    blog_tag: "RESEARCH BLOG",
+    blog_title: "Latest Research Notes & Articles",
+    blog_desc: "Technical notes, simulations, and discoveries in astrophysics and computing.",
+    btn_more_blog: "View All Articles",
+    featured_blog_1: "post-1",
+    featured_blog_2: "post-2",
+    featured_blog_3: "post-3",
+
     // Contact
     contact_tag: "CONTACT",
     contact_title: "Let's Discover Something New Together",
@@ -321,6 +341,107 @@ function setLanguage(lang) {
   } else {
     document.title = "Aren Azat | Astrophysics, Computational Physics & Code";
   }
+
+  // Re-render homepage blog cards with active language
+  renderHomeBlogPosts();
+}
+
+// ==========================================================================
+// 2.1 HOMEPAGE FEATURED BLOG SHOWCASE ENGINE
+// ==========================================================================
+let homePosts = [];
+
+function renderHomeBlogPosts() {
+  const container = document.getElementById('home-blog-grid');
+  if (!container) return;
+
+  const langObj = (translations && translations[currentLang]) ? translations[currentLang] : (translations.tr || {});
+  
+  // Featured IDs selected via admin panel or defaults
+  const featuredIds = [
+    langObj.featured_blog_1 || 'post-1',
+    langObj.featured_blog_2 || 'post-2',
+    langObj.featured_blog_3 || 'post-3'
+  ];
+
+  let selectedPosts = [];
+  featuredIds.forEach(id => {
+    const found = homePosts.find(p => p.id === id);
+    if (found && !selectedPosts.some(sp => sp.id === found.id)) {
+      selectedPosts.push(found);
+    }
+  });
+
+  // If fewer than 3 found from selected IDs, supplement with available posts
+  if (selectedPosts.length < 3) {
+    homePosts.forEach(p => {
+      if (selectedPosts.length < 3 && !selectedPosts.some(sp => sp.id === p.id)) {
+        selectedPosts.push(p);
+      }
+    });
+  }
+
+  if (selectedPosts.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2.5rem;">
+        Henüz blog yazısı bulunmuyor.
+      </div>
+    `;
+    return;
+  }
+
+  const readBtnText = currentLang === 'tr' ? 'Yazıyı Oku' : 'Read Article';
+
+  container.innerHTML = selectedPosts.map(post => {
+    return `
+      <article class="blog-card" data-id="${escapeHtml(post.id)}">
+        <div class="blog-card-header">
+          <span class="blog-pill-category">${escapeHtml(post.category || 'Blog')}</span>
+          <span class="blog-meta-time">${escapeHtml(post.readTime || '')}</span>
+        </div>
+        <h3 class="blog-card-title">${escapeHtml(post.title)}</h3>
+        <p class="blog-card-excerpt">${escapeHtml(post.summary || '')}</p>
+        <div class="blog-card-footer">
+          <span class="blog-meta-date">${escapeHtml(post.date || '')}</span>
+          <a href="./blog.html?post=${encodeURIComponent(post.id)}" class="btn-read-post">
+            <span>${readBtnText}</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+async function initHomeBlog() {
+  try {
+    const res = await fetch('./data/posts.json?v=' + Date.now());
+    if (res.ok) {
+      homePosts = await res.json();
+    }
+  } catch (e) {
+    console.warn('Could not fetch posts.json for homepage', e);
+  }
+
+  // Overlay local draft posts from admin panel
+  const localPosts = localStorage.getItem('aren_custom_posts');
+  if (localPosts) {
+    try {
+      const parsed = JSON.parse(localPosts);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        homePosts = parsed;
+      }
+    } catch (e) {}
+  }
+
+  renderHomeBlogPosts();
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
 }
 
 // Dynamically load content from localStorage and content.json
@@ -509,6 +630,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load custom edits or live content asynchronously
   loadDynamicContent();
+
+  // Initialize homepage featured blog showcase
+  initHomeBlog();
 
   // Initialize UI features
   initNavbar();
