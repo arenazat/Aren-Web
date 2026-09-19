@@ -696,29 +696,44 @@
             <div>
               <h4 style="color: #e2e8f0; font-size: 0.95rem; margin-bottom: 0.25rem;">Tüm Blog Yazıları</h4>
               <p style="font-size: 0.82rem; color: var(--adm-text-muted);">
-                Blog yazılarını buradan ekleyebilir, düzenleyebilir veya silebilirsiniz.
+                Google Dokümanlarınızı fotoğraflı ve biçimlendirilmiş olarak tek tıkla yükleyebilir veya klasik yazılar ekleyebilirsiniz.
               </p>
             </div>
-            <button type="button" class="btn-adm btn-adm-publish" onclick="openBlogEditor()">
-              ✏️ Yeni Yazı Ekle
-            </button>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="btn-adm btn-adm-publish" onclick="openBlogEditor(null, true)">
+                📄 Google Doc ile Yazı Ekle
+              </button>
+              <button type="button" class="btn-adm btn-adm-preview" onclick="openBlogEditor(null, false)">
+                ✏️ Klasik Metin Yazısı Ekle
+              </button>
+            </div>
           </div>
 
           <!-- Blog Post Editor Card (hidden by default) -->
           <div class="adm-blog-editor-card" id="blog-editor-card">
-            <h4 id="blog-editor-heading" style="margin-bottom: 1.25rem; color: #a5b4fc; font-size: 1.05rem;">Yeni Blog Yazısı Ekle</h4>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+              <h4 id="blog-editor-heading" style="color: #a5b4fc; font-size: 1.05rem; margin: 0;">Yeni Blog Yazısı Ekle</h4>
+              <div class="adm-content-type-toggle">
+                <button type="button" class="adm-type-btn active" id="btn-mode-gdoc" onclick="switchBlogContentMode('gdoc')">
+                  📄 Google Doküman (Önerilen)
+                </button>
+                <button type="button" class="adm-type-btn" id="btn-mode-text" onclick="switchBlogContentMode('text')">
+                  ✍️ Klasik Metin
+                </button>
+              </div>
+            </div>
             <input type="hidden" id="blog-edit-id">
 
             <div class="adm-form-grid">
               <div class="adm-field-group">
                 <label class="adm-field-label">Yazı Başlığı *</label>
-                <input type="text" id="blog-edit-title" class="adm-field-input" placeholder="Örn: N-Body Simülasyonunda Enerji Korunumu...">
+                <input type="text" id="blog-edit-title" class="adm-field-input" placeholder="Örn: Galaksi Dönme Eğrileri ve Karanlık Madde...">
               </div>
 
               <div class="adm-grid-2">
                 <div class="adm-field-group">
                   <label class="adm-field-label">Kategori</label>
-                  <input type="text" id="blog-edit-category" class="adm-field-input" placeholder="Örn: Hesaplamalı Fizik">
+                  <input type="text" id="blog-edit-category" class="adm-field-input" placeholder="Örn: Astrofizik, Hesaplamalı Fizik...">
                 </div>
                 <div class="adm-field-group">
                   <label class="adm-field-label">Yayın Tarihi</label>
@@ -728,17 +743,57 @@
 
               <div class="adm-field-group">
                 <label class="adm-field-label">Okuma Süresi</label>
-                <input type="text" id="blog-edit-readtime" class="adm-field-input" placeholder="Örn: 4 dk okuma">
+                <input type="text" id="blog-edit-readtime" class="adm-field-input" placeholder="Örn: 5 dk okuma">
               </div>
 
               <div class="adm-field-group">
-                <label class="adm-field-label">Özet (Kart önizlemesi)</label>
-                <textarea id="blog-edit-summary" class="adm-field-textarea" rows="2" placeholder="Yazının kısa özeti..."></textarea>
+                <label class="adm-field-label">Kısa Özet (Kartlarda Görünen Giriş Cümlesi)</label>
+                <textarea id="blog-edit-summary" class="adm-field-textarea" rows="2" placeholder="Yazının ana temasını belirten 1-2 cümlelik özet..."></textarea>
               </div>
 
-              <div class="adm-field-group">
-                <label class="adm-field-label">Tam İçerik</label>
-                <textarea id="blog-edit-content" class="adm-field-textarea" rows="10" placeholder="Yazının tam içeriği. ## ile başlayan satırlar başlık, ### ile alt başlık olur. Paragraflar arasında boş satır bırakın."></textarea>
+              <!-- GOOGLE DOC SECTION -->
+              <div id="wrapper-mode-gdoc" class="adm-gdoc-section">
+                <div class="adm-gdoc-guide-banner">
+                  <div class="guide-badge">💡 Kolay Yayınlama Rehberi</div>
+                  <div class="guide-steps">
+                    <span>1. <strong>Google Docs</strong>'ta yazınızı hazırlayın ve istediğiniz tüm <strong>fotoğrafları, grafikleri ve tabloları</strong> ekleyin.</span>
+                    <span>2. Sağ üstteki <strong>"Paylaş" (Share)</strong> butonuna basıp Genel Erişim'i <strong>"Bağlantıya sahip olan herkes görüntüleyebilir"</strong> yapın.</span>
+                    <span>3. Bağlantıyı kopyalayıp aşağıdaki kutucuğa yapıştırın. Sistem bağlantıyı otomatik olarak en temiz gömülü okuyucu moduna dönüştürür!</span>
+                  </div>
+                </div>
+
+                <div class="adm-field-group">
+                  <label class="adm-field-label" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>Google Doküman Bağlantısı (URL veya Gömme Kodu) *</span>
+                    <span id="gdoc-status-badge" class="adm-badge-neutral">Bağlantı bekleniyor</span>
+                  </label>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="blog-edit-gdoc" class="adm-field-input" placeholder="https://docs.google.com/document/d/.../edit veya pub linki..." oninput="handleGoogleDocUrlInput()">
+                    <button type="button" class="btn-adm btn-adm-preview" style="white-space: nowrap;" onclick="handleGoogleDocUrlInput(true)">
+                      🔍 Önizle
+                    </button>
+                  </div>
+                  <span class="adm-field-hint">
+                    Normal paylaşım linki (<code>docs.google.com/document/d/...</code>), web'de yayınla linki veya iframe kodu yapıştırabilirsiniz.
+                  </span>
+                </div>
+
+                <!-- Admin Live Preview Container -->
+                <div id="admin-gdoc-preview-box" class="adm-gdoc-preview-card" style="display: none;">
+                  <div class="adm-gdoc-preview-bar">
+                    <span style="font-weight: 600; font-size: 0.85rem; color: #a5b4fc;">👁️ Canlı Doküman & Fotoğraf Önizlemesi</span>
+                    <a id="admin-gdoc-external-link" href="#" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; font-size: 0.8rem; text-decoration: none;">
+                      Dokümanı Yeni Sekmede Aç ↗
+                    </a>
+                  </div>
+                  <iframe id="admin-gdoc-preview-iframe" class="adm-gdoc-preview-frame" src="about:blank" title="Google Doküman Önizleme"></iframe>
+                </div>
+              </div>
+
+              <!-- CLASSIC TEXT SECTION -->
+              <div id="wrapper-mode-text" class="adm-field-group" style="display: none;">
+                <label class="adm-field-label">Tam Metin İçeriği</label>
+                <textarea id="blog-edit-content" class="adm-field-textarea" rows="8" placeholder="Yazının metni. ## ile başlayan satırlar başlık, ### ile alt başlık olur. Paragraflar arasında boş satır bırakın."></textarea>
                 <span class="adm-field-hint">## Başlık, ### Alt Başlık olarak formatlanır. Paragrafları boş satırla ayırın.</span>
               </div>
             </div>

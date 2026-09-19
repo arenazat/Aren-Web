@@ -390,13 +390,20 @@ function renderHomeBlogPosts() {
     return;
   }
 
-  const readBtnText = currentLang === 'tr' ? 'Yazıyı Oku' : 'Read Article';
-
   container.innerHTML = selectedPosts.map(post => {
+    const isGdoc = Boolean(post.googleDocUrl && post.googleDocUrl.trim());
+    const gdocBadge = isGdoc ? `<span class="blog-badge-gdoc">📄 Google Doc</span>` : '';
+    const readBtnText = isGdoc 
+      ? (currentLang === 'tr' ? 'Dokümanı Oku' : 'Read Doc')
+      : (currentLang === 'tr' ? 'Yazıyı Oku' : 'Read Article');
+
     return `
-      <article class="blog-card" data-id="${escapeHtml(post.id)}">
+      <article class="blog-card ${isGdoc ? 'is-gdoc-post' : ''}" data-id="${escapeHtml(post.id)}">
         <div class="blog-card-header">
-          <span class="blog-pill-category">${escapeHtml(post.category || 'Blog')}</span>
+          <div style="display: flex; gap: 0.45rem; align-items: center; flex-wrap: wrap;">
+            <span class="blog-pill-category">${escapeHtml(post.category || 'Blog')}</span>
+            ${gdocBadge}
+          </div>
           <span class="blog-meta-time">${escapeHtml(post.readTime || '')}</span>
         </div>
         <h3 class="blog-card-title">${escapeHtml(post.title)}</h3>

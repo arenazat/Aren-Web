@@ -427,8 +427,108 @@ async function publishToGitHub() {
 }
 
 // ==========================================================================
-// 5. BLOG POSTS CRUD CONTROLLER
 // ==========================================================================
+// 5. BLOG POSTS CRUD CONTROLLER WITH GOOGLE DOCS SUPPORT
+// ==========================================================================
+let blogContentMode = 'gdoc';
+
+function formatGoogleDocEmbedUrl(input) {
+  if (!input) return null;
+  let str = input.trim();
+
+  // 1. If iframe was pasted, extract src
+  const iframeMatch = str.match(/src=["']([^"']+)["']/i);
+  if (iframeMatch && iframeMatch[1]) {
+    str = iframeMatch[1].trim();
+  }
+
+  // 2. If it's a published Google Doc: /document/d/e/.../pub
+  const pubMatch = str.match(/docs\.google\.com\/document\/d\/e\/([a-zA-Z0-9_-]+)\/pub/);
+  if (pubMatch) {
+    const pubId = pubMatch[1];
+    return `https://docs.google.com/document/d/e/${pubId}/pub?embedded=true`;
+  }
+
+  // 3. If it's a standard Google Doc: /document/d/DOC_ID/...
+  const docMatch = str.match(/docs\.google\.com\/document\/d\/([a-zA-Z0-9_-]+)/);
+  if (docMatch) {
+    const docId = docMatch[1];
+    return `https://docs.google.com/document/d/${docId}/preview`;
+  }
+
+  // 4. If it's already a full Google Doc preview/embed URL
+  if (str.includes('docs.google.com/document/')) {
+    if (!str.includes('/preview') && !str.includes('/pub')) {
+      return str + (str.includes('?') ? '&embedded=true' : '?embedded=true');
+    }
+    return str;
+  }
+
+  return null;
+}
+
+function switchBlogContentMode(mode) {
+  blogContentMode = mode;
+  const btnGdoc = document.getElementById('btn-mode-gdoc');
+  const btnText = document.getElementById('btn-mode-text');
+  const wrapGdoc = document.getElementById('wrapper-mode-gdoc');
+  const wrapText = document.getElementById('wrapper-mode-text');
+
+  if (mode === 'gdoc') {
+    if (btnGdoc) btnGdoc.classList.add('active');
+    if (btnText) btnText.classList.remove('active');
+    if (wrapGdoc) wrapGdoc.style.display = 'block';
+    if (wrapText) wrapText.style.display = 'none';
+  } else {
+    if (btnText) btnText.classList.add('active');
+    if (btnGdoc) btnGdoc.classList.remove('active');
+    if (wrapGdoc) wrapGdoc.style.display = 'none';
+    if (wrapText) wrapText.style.display = 'block';
+  }
+}
+
+function handleGoogleDocUrlInput(forcePreview = false) {
+  const input = document.getElementById('blog-edit-gdoc');
+  const statusBadge = document.getElementById('gdoc-status-badge');
+  const previewBox = document.getElementById('admin-gdoc-preview-box');
+  const previewIframe = document.getElementById('admin-gdoc-preview-iframe');
+  const extLink = document.getElementById('admin-gdoc-external-link');
+
+  if (!input) return;
+  const rawUrl = input.value.trim();
+
+  if (!rawUrl) {
+    if (statusBadge) {
+      statusBadge.textContent = 'Bağlantı bekleniyor';
+      statusBadge.className = 'adm-badge-neutral';
+    }
+    if (previewBox) previewBox.style.display = 'none';
+    if (previewIframe) previewIframe.src = 'about:blank';
+    return;
+  }
+
+  const embedUrl = formatGoogleDocEmbedUrl(rawUrl);
+  if (embedUrl) {
+    if (statusBadge) {
+      statusBadge.textContent = '✓ Geçerli Google Doc bağlantısı';
+      statusBadge.className = 'adm-badge-success';
+    }
+    if (previewBox) previewBox.style.display = 'block';
+    if (previewIframe && (forcePreview || previewIframe.src !== embedUrl)) {
+      previewIframe.src = embedUrl;
+    }
+    if (extLink) {
+      extLink.href = rawUrl.startsWith('http') ? rawUrl : embedUrl;
+    }
+  } else {
+    if (statusBadge) {
+      statusBadge.textContent = '⚠️ Geçersiz bağlantı (docs.google.com linki olmalı)';
+      statusBadge.className = 'adm-badge-warning';
+    }
+    if (previewBox) previewBox.style.display = 'none';
+  }
+}
+
 function renderAdminBlogList() {
   const container = document.getElementById('adm-blog-list-container');
   if (!container) return;
@@ -442,29 +542,39 @@ function renderAdminBlogList() {
     return;
   }
 
-  container.innerHTML = sitePosts.map(post => `
-    <div class="adm-blog-item" data-id="${post.id}">
-      <div class="adm-blog-item-info">
-        <div class="adm-blog-item-title">${escapeHtml(post.title)}</div>
-        <div class="adm-blog-item-meta">
-          <span style="color: #a5b4fc; font-weight: 600;">📁 ${escapeHtml(post.category || 'Genel')}</span>
-          <span>📅 ${escapeHtml(post.date || '')}</span>
-          <span>⏱️ ${escapeHtml(post.readTime || '')}</span>
+  container.innerHTML = sitePosts.map(post => {
+    const isGdoc = Boolean(post.googleDocUrl && post.googleDocUrl.trim());
+    const gdocBadge = isGdoc 
+      ? `<span class="adm-badge-gdoc" title="Google Doküman formatında zengin yazı">📄 Google Doc</span>` 
+      : `<span class="adm-badge-text" title="Klasik metin formatı">✍️ Metin</span>`;
+
+    return `
+      <div class="adm-blog-item" data-id="${escapeHtml(post.id)}">
+        <div class="adm-blog-item-info">
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <div class="adm-blog-item-title">${escapeHtml(post.title)}</div>
+            ${gdocBadge}
+          </div>
+          <div class="adm-blog-item-meta">
+            <span style="color: #a5b4fc; font-weight: 600;">📁 ${escapeHtml(post.category || 'Genel')}</span>
+            <span>📅 ${escapeHtml(post.date || '')}</span>
+            <span>⏱️ ${escapeHtml(post.readTime || '')}</span>
+          </div>
+        </div>
+        <div class="adm-blog-item-actions">
+          <button type="button" class="btn-adm btn-adm-preview" onclick="openBlogEditor('${escapeHtml(post.id)}')">
+            ✏️ Düzenle
+          </button>
+          <button type="button" class="btn-adm btn-adm-logout" onclick="deleteBlogPost('${escapeHtml(post.id)}')">
+            🗑️ Sil
+          </button>
         </div>
       </div>
-      <div class="adm-blog-item-actions">
-        <button type="button" class="btn-adm btn-adm-preview" onclick="openBlogEditor('${post.id}')">
-          ✏️ Düzenle
-        </button>
-        <button type="button" class="btn-adm btn-adm-logout" onclick="deleteBlogPost('${post.id}')">
-          🗑️ Sil
-        </button>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
-function openBlogEditor(postId = null) {
+function openBlogEditor(postId = null, preferGdoc = true) {
   const card = document.getElementById('blog-editor-card');
   const heading = document.getElementById('blog-editor-heading');
   const idInput = document.getElementById('blog-edit-id');
@@ -474,6 +584,7 @@ function openBlogEditor(postId = null) {
   const timeInput = document.getElementById('blog-edit-readtime');
   const sumInput = document.getElementById('blog-edit-summary');
   const contentInput = document.getElementById('blog-edit-content');
+  const gdocInput = document.getElementById('blog-edit-gdoc');
 
   if (!card) return;
 
@@ -488,15 +599,28 @@ function openBlogEditor(postId = null) {
     if (timeInput) timeInput.value = post.readTime || '';
     if (sumInput) sumInput.value = post.summary || '';
     if (contentInput) contentInput.value = post.content || '';
+    if (gdocInput) gdocInput.value = post.googleDocUrl || '';
+
+    // Switch mode based on whether post has a Google Doc URL
+    if (post.googleDocUrl && post.googleDocUrl.trim()) {
+      switchBlogContentMode('gdoc');
+      handleGoogleDocUrlInput(true);
+    } else {
+      switchBlogContentMode('text');
+    }
   } else {
-    if (heading) heading.textContent = 'Yeni Blog Yazısı Ekle';
+    if (heading) heading.textContent = preferGdoc ? 'Google Doc ile Yeni Yazı Ekle' : 'Yeni Blog Yazısı Ekle';
     if (idInput) idInput.value = '';
     if (titleInput) titleInput.value = '';
     if (catInput) catInput.value = 'Astrofizik';
     if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
-    if (timeInput) timeInput.value = '4 dk okuma';
+    if (timeInput) timeInput.value = '5 dk okuma';
     if (sumInput) sumInput.value = '';
     if (contentInput) contentInput.value = '';
+    if (gdocInput) gdocInput.value = '';
+
+    switchBlogContentMode(preferGdoc ? 'gdoc' : 'text');
+    handleGoogleDocUrlInput(false);
   }
 
   card.style.display = 'block';
@@ -516,6 +640,7 @@ function saveBlogPostForm() {
   const timeInput = document.getElementById('blog-edit-readtime');
   const sumInput = document.getElementById('blog-edit-summary');
   const contentInput = document.getElementById('blog-edit-content');
+  const gdocInput = document.getElementById('blog-edit-gdoc');
 
   const title = titleInput ? titleInput.value.trim() : '';
   if (!title) {
@@ -523,20 +648,40 @@ function saveBlogPostForm() {
     return;
   }
 
+  let formattedGdocUrl = '';
+  let content = contentInput ? contentInput.value.trim() : '';
+
+  if (blogContentMode === 'gdoc') {
+    const rawGdoc = gdocInput ? gdocInput.value.trim() : '';
+    if (!rawGdoc) {
+      showToast('Lütfen Google Doküman linkinizi yapıştırın.', 'error');
+      return;
+    }
+    formattedGdocUrl = formatGoogleDocEmbedUrl(rawGdoc);
+    if (!formattedGdocUrl) {
+      showToast('Geçersiz Google Docs linki. Lütfen docs.google.com/document bağlantısı girin.', 'error');
+      return;
+    }
+    if (!content) {
+      content = 'Bu araştırma yazısı fotoğraflar ve biçimlendirmelerle Google Docs üzerinden yayınlanmıştır. Yukarıdaki pencereden tam ekran okuyabilirsiniz.';
+    }
+  }
+
   const postId = idInput && idInput.value ? idInput.value : ('post-' + Date.now());
-  const category = catInput ? catInput.value.trim() : 'Genel';
+  const category = catInput && catInput.value.trim() ? catInput.value.trim() : 'Astrofizik';
   const date = dateInput && dateInput.value ? dateInput.value : new Date().toISOString().split('T')[0];
-  const readTime = timeInput ? timeInput.value.trim() : '3 dk okuma';
-  const summary = sumInput ? sumInput.value.trim() : '';
-  const content = contentInput ? contentInput.value.trim() : '';
+  const readTime = timeInput && timeInput.value.trim() ? timeInput.value.trim() : '4 dk okuma';
+  const summary = sumInput && sumInput.value.trim() ? sumInput.value.trim() : title;
 
   const postObj = {
     id: postId,
     title,
     category,
+    categorySlug: category.toLowerCase().replace(/[^a-z0-9]/g, '-'),
     date,
     readTime,
     summary,
+    googleDocUrl: formattedGdocUrl,
     content,
     author: 'Aren Azat',
     lang: 'tr'
@@ -545,7 +690,7 @@ function saveBlogPostForm() {
   const existingIdx = sitePosts.findIndex(p => p.id === postId);
   if (existingIdx >= 0) {
     sitePosts[existingIdx] = postObj;
-    showToast('Blog yazısı güncellendi!', 'success');
+    showToast('Blog yazısı başarıyla güncellendi!', 'success');
   } else {
     sitePosts.unshift(postObj);
     showToast('Yeni blog yazısı başarıyla eklendi!', 'success');

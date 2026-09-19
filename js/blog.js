@@ -86,10 +86,16 @@ function renderBlogPosts(filtered = null) {
   if (emptyState) emptyState.style.display = 'none';
 
   grid.innerHTML = postsToRender.map(post => {
+    const isGdoc = Boolean(post.googleDocUrl && post.googleDocUrl.trim());
+    const gdocBadge = isGdoc ? `<span class="blog-badge-gdoc">📄 Google Doc</span>` : '';
+
     return `
-      <article class="blog-card" data-id="${post.id}">
+      <article class="blog-card ${isGdoc ? 'is-gdoc-post' : ''}" data-id="${post.id}">
         <div class="blog-card-header">
-          <span class="blog-pill-category">${escapeHtml(post.category || 'Genel')}</span>
+          <div style="display: flex; gap: 0.45rem; align-items: center; flex-wrap: wrap;">
+            <span class="blog-pill-category">${escapeHtml(post.category || 'Genel')}</span>
+            ${gdocBadge}
+          </div>
           <span class="blog-meta-time">${escapeHtml(post.readTime || '')}</span>
         </div>
         <h3 class="blog-card-title">${escapeHtml(post.title)}</h3>
@@ -97,7 +103,7 @@ function renderBlogPosts(filtered = null) {
         <div class="blog-card-footer">
           <span class="blog-meta-date">${escapeHtml(post.date || '')}</span>
           <button type="button" class="btn-read-post" onclick="openReaderModal('${post.id}')">
-            <span>Yazıyı Oku</span>
+            <span>${isGdoc ? 'Dokümanı Oku' : 'Yazıyı Oku'}</span>
             <span class="arrow">→</span>
           </button>
         </div>
@@ -146,7 +152,7 @@ function initSearch() {
   });
 }
 
-// Reader Modal
+// Reader Modal & Google Docs Integration
 function initReaderModal() {
   const modal = document.getElementById('reader-modal');
   const closeBtn = document.getElementById('modal-close-btn');
@@ -166,17 +172,34 @@ function initReaderModal() {
   });
 }
 
+function toggleReaderFullscreen() {
+  const card = document.getElementById('reader-modal-card');
+  const fsIcon = document.getElementById('fs-icon');
+  const fsText = document.getElementById('fs-text');
+  if (!card) return;
+
+  const isFs = card.classList.toggle('fullscreen');
+  if (fsIcon) fsIcon.textContent = isFs ? '🗗' : '⛶';
+  if (fsText) fsText.textContent = isFs ? 'Küçült' : 'Tam Ekran';
+}
+
 function openReaderModal(postId) {
   const post = allPosts.find(p => p.id === postId);
   if (!post) return;
 
   const modal = document.getElementById('reader-modal');
+  const card = document.getElementById('reader-modal-card');
   const titleEl = document.getElementById('modal-title');
   const catEl = document.getElementById('modal-category');
   const dateEl = document.getElementById('modal-date');
   const timeEl = document.getElementById('modal-read-time');
   const authorEl = document.getElementById('modal-author');
   const bodyEl = document.getElementById('modal-body');
+  const gdocBadge = document.getElementById('modal-gdoc-badge');
+  const gdocWrapper = document.getElementById('modal-gdoc-wrapper');
+  const gdocFrame = document.getElementById('modal-gdoc-frame');
+  const gdocLoading = document.getElementById('modal-gdoc-loading');
+  const gdocOpenLink = document.getElementById('modal-gdoc-open-link');
 
   if (titleEl) titleEl.textContent = post.title;
   if (catEl) catEl.textContent = post.category;
@@ -184,19 +207,59 @@ function openReaderModal(postId) {
   if (timeEl) timeEl.textContent = post.readTime;
   if (authorEl) authorEl.textContent = post.author || 'Aren Azat';
 
-  // Format content paragraphs
-  if (bodyEl) {
-    const content = post.content || post.summary || '';
-    const formattedHtml = content.split('\n\n').map(paragraph => {
-      if (paragraph.startsWith('### ')) {
-        return `<h4>${escapeHtml(paragraph.replace('### ', ''))}</h4>`;
+  const hasGdoc = Boolean(post.googleDocUrl && post.googleDocUrl.trim());
+
+  if (hasGdoc) {
+    if (gdocBadge) gdocBadge.style.display = 'inline-flex';
+    if (gdocWrapper) gdocWrapper.style.display = 'block';
+
+    if (gdocOpenLink) {
+      gdocOpenLink.href = post.googleDocUrl;
+    }
+
+    if (gdocLoading) {
+      gdocLoading.style.display = 'flex';
+    }
+
+    if (gdocFrame) {
+      gdocFrame.src = post.googleDocUrl;
+      gdocFrame.onload = () => {
+        if (gdocLoading) gdocLoading.style.display = 'none';
+      };
+    }
+
+    // Display summary or intro paragraph below or above doc
+    if (bodyEl) {
+      if (post.summary) {
+        bodyEl.innerHTML = `
+          <div class="gdoc-post-summary-card">
+            <div class="summary-label">📌 Makale Özeti</div>
+            <p>${escapeHtml(post.summary)}</p>
+          </div>
+        `;
+      } else {
+        bodyEl.innerHTML = '';
       }
-      if (paragraph.startsWith('## ')) {
-        return `<h3>${escapeHtml(paragraph.replace('## ', ''))}</h3>`;
-      }
-      return `<p>${escapeHtml(paragraph).replace(/\n/g, '<br>')}</p>`;
-    }).join('');
-    bodyEl.innerHTML = formattedHtml;
+    }
+  } else {
+    // Classic text article
+    if (gdocBadge) gdocBadge.style.display = 'none';
+    if (gdocWrapper) gdocWrapper.style.display = 'none';
+    if (gdocFrame) gdocFrame.src = 'about:blank';
+
+    if (bodyEl) {
+      const content = post.content || post.summary || '';
+      const formattedHtml = content.split('\n\n').map(paragraph => {
+        if (paragraph.startsWith('### ')) {
+          return `<h4>${escapeHtml(paragraph.replace('### ', ''))}</h4>`;
+        }
+        if (paragraph.startsWith('## ')) {
+          return `<h3>${escapeHtml(paragraph.replace('## ', ''))}</h3>`;
+        }
+        return `<p>${escapeHtml(paragraph).replace(/\n/g, '<br>')}</p>`;
+      }).join('');
+      bodyEl.innerHTML = formattedHtml;
+    }
   }
 
   if (modal) {
@@ -207,6 +270,22 @@ function openReaderModal(postId) {
 
 function closeReaderModal() {
   const modal = document.getElementById('reader-modal');
+  const card = document.getElementById('reader-modal-card');
+  const gdocFrame = document.getElementById('modal-gdoc-frame');
+
+  if (card && card.classList.contains('fullscreen')) {
+    card.classList.remove('fullscreen');
+    const fsIcon = document.getElementById('fs-icon');
+    const fsText = document.getElementById('fs-text');
+    if (fsIcon) fsIcon.textContent = '⛶';
+    if (fsText) fsText.textContent = 'Tam Ekran';
+  }
+
+  // Clear iframe to release resources
+  if (gdocFrame) {
+    gdocFrame.src = 'about:blank';
+  }
+
   if (modal) {
     modal.classList.remove('open');
     document.body.style.overflow = '';

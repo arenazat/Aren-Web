@@ -132,11 +132,20 @@
 
   <!-- Reader Modal -->
   <div class="reader-modal-overlay" id="reader-modal" role="dialog" aria-modal="true">
-    <div class="reader-modal-card">
-      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Kapat">✕</button>
+    <div class="reader-modal-card" id="reader-modal-card">
+      
+      <!-- Top Action Bar -->
+      <div class="modal-top-actions">
+        <button type="button" class="modal-action-btn" id="modal-fullscreen-toggle" onclick="toggleReaderFullscreen()" title="Genişlet / Tam Ekran">
+          <span id="fs-icon">⛶</span>
+          <span class="action-btn-text" id="fs-text">Tam Ekran</span>
+        </button>
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Kapat">✕</button>
+      </div>
       
       <div class="modal-meta-row">
         <span class="blog-pill-category" id="modal-category">Astrofizik</span>
+        <span id="modal-gdoc-badge" class="blog-badge-gdoc" style="display: none;">📄 Google Doküman</span>
         <span class="blog-meta-time" id="modal-read-time">4 dk okuma</span>
         <span class="dot">•</span>
         <span class="blog-meta-date" id="modal-date">2026-02-18</span>
@@ -152,8 +161,34 @@
         </div>
       </div>
 
+      <!-- Google Docs Embed Container -->
+      <div class="gdoc-reader-wrapper" id="modal-gdoc-wrapper" style="display: none;">
+        <div class="gdoc-reader-toolbar">
+          <div class="gdoc-source-indicator">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM13 9V3.5L18.5 9H13z"/>
+            </svg>
+            <span>Google Docs Zengin Okuyucu (Fotoğraflar & Tablolar)</span>
+          </div>
+          <div class="gdoc-toolbar-actions">
+            <a href="#" id="modal-gdoc-open-link" target="_blank" rel="noopener noreferrer" class="btn-gdoc-action">
+              <span>Google Docs'ta Aç</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="gdoc-iframe-container" id="modal-gdoc-iframe-container">
+          <div class="gdoc-loading-skeleton" id="modal-gdoc-loading">
+            <div class="gdoc-spinner"></div>
+            <span>Doküman ve fotoğraflar yükleniyor...</span>
+          </div>
+          <iframe id="modal-gdoc-frame" class="gdoc-embed-frame" src="about:blank" allow="fullscreen" loading="lazy" title="Google Doküman Okuyucu"></iframe>
+        </div>
+      </div>
+
+      <!-- Standard Content / Summary -->
       <div class="modal-body" id="modal-body">
-        <!-- Full content rendered by blog.js -->
+        <!-- Full content or summary rendered by blog.js -->
       </div>
     </div>
   </div>
